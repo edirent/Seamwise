@@ -1,0 +1,15 @@
+{
+  "declared_utc": "2026-11-10T08:49:56Z",
+  "resources": "one pinned allowed CPU, one decoder thread, batch1, sequential benchmark jobs",
+  "P0_wall_s": 1800,
+  "oracle_individual_wall_s": 2,
+  "oracle_aggregate_wall_s": 600,
+  "P1_P2_validation_wall_s": 1800,
+  "build_correctness_wall_s": 900,
+  "P3_conditional": "Only after actionable P0/P1/P2 evidence",
+  "P4_max_cpu_hours": 5,
+  "P4_fixed_N_max": 10000,
+  "P4_selection": "fixed sample count and final matrix after validation throughput planning, before opening any new confirmatory outcome",
+  "diagnostic_selection": "12 uniform Seamwise-only failures, 8 random both-correct controls, up to 8 Tesseract-only failures and 4 both-wrong per workload; seeded selection within paired outcome strata; no population-rate inference from enriched strata",
+  "old_test_status": "EXPLORATORY_ONLY"
+}

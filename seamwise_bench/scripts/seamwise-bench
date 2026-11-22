@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+task_root=$(cd "$(dirname "$0")/.." && pwd)
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 RAYON_NUM_THREADS=1
+export PYTHONPATH="$task_root/python${PYTHONPATH:+:$PYTHONPATH}"
+exec "$task_root/.venv/bin/python" -m seamwise_bench.cli "$@"

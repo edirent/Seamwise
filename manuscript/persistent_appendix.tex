@@ -1,0 +1,160 @@
+\section{Persistent conditional oracle: algorithm and correctness}\label{app:persistent}
+This appendix defines the persistent oracle for $A=D_{R(J),J}$ and $t=t_J$. Vectors below use global labels within the local problem, with supports stored only where nonzero. The target $t_S$ equals $t$ on $C(S)$ and is zero elsewhere. At a singleton check $i$, initialize an empty basis, $r_S=t_i e_i$, and $u_S=0$. At a singleton fault vertex, initialize an empty basis and zero residual and witness. A fault column has an initially false activation flag.
+
+\AlgBox{Algorithm B: merge-persistent local oracle}{
+\textbf{On merging disjoint components $S_1,S_2$:}
+\begin{enumerate}
+\item Concatenate their basis lists in decreasing pivot order; set $r=r_{S_1}+r_{S_2}$ and $u=u_{S_1}+u_{S_2}$.
+\item Scan fault vertices in the merged component. Activate each not-yet-inserted $j$ whose complete check neighborhood is now internal.
+\item For an activated column initialize $(v,c)=(A_{:,j},e_j)$. For each old pivot $p$ in decreasing order, if $v[p]=1$, set $(v,c)\leftarrow(v+b_p,c+c_p)$.
+\item If $v\ne0$, let $p=\max\supp(v)$ and insert $(b_p,c_p)=(v,c)$. If $r[p]=1$, set $(r,u)\leftarrow(r+v,u+c)$.
+\item If $v=0$, no detector pivot is added. Optionally emit $k_j=c$ for the logical-reach certificate.
+\item Return valid exactly when $r=0$; on validity return $u$.
+\end{enumerate}}
+
+\begin{lemma}[Disjoint support and monotone eligibility]\label{lem:merge}
+Under merge-only growth, previously internal fault columns remain internal. Separate current components have disjoint check-coordinate sets, so their stored detector bases are jointly independent and already in echelon form when ordered by pivot. Their residuals have zeros at all inherited pivots after merging.
+\end{lemma}
+\begin{proof}
+If $f_j$ and all checks adjacent to it lie in $S$, they remain in every later component containing $S$. Hence a column is activated at most once. Each basis vector in $S$ is a combination of internal columns, so its detector support lies in $C(S)$. For distinct components these supports are disjoint. A cross-component linear dependence separates into two independent within-component dependences, each zero. Inherited pivot coordinates are distinct, and each component's residual is zero at its own pivots and outside its check support. Adding residuals preserves all inherited zeros.
+\end{proof}
+
+\begin{lemma}[Insertion invariant]\label{lem:insert}
+Algorithm B preserves Eq.~\eqref{eq:invariant}. The coefficient attached to a nonzero new detector vector satisfies $Ac=v$, and a dependent insertion emits a true kernel relation.
+\end{lemma}
+\begin{proof}
+Initially $Ac=Ae_j=A_{:,j}=v$. Each XOR with $(b_p,c_p)$ preserves $Ac=v$. Decreasing-pivot reduction clears all old pivots. If $v\ne0$, its leading coordinate is a new pivot and its addition enlarges the span by precisely the new column. If $r[p]=1$, adding $(v,c)$ to $(r,u)$ preserves $r+Au=t_S$ and clears the new pivot without altering old residual pivots. If $r[p]=0$, the invariant already holds. When $v=0$, the column was dependent, the old span already contains it, and $Ac=0$. Its coefficient vector is supported on previously inserted columns and the new column.
+\end{proof}
+
+\paragraph{Proof of Theorem~\ref{thm:oracle}.}
+Induct over merges and insertions using Lemmas~\ref{lem:merge} and~\ref{lem:insert}. The stored span equals the span of all eligible columns, and $t_S=r_S+Au_S$. A nonzero vector in an echelon span has a nonzero leading pivot: choose the largest pivot among the participating basis vectors. Since $r_S$ is zero at all pivots, it belongs to that span exactly when $r_S=0$. Thus $t_S$ belongs to the eligible column space exactly when the oracle reports valid. On validity, $Au_S=t_S$. Identical validity flags give identical subsequent growth choices for a deterministic scheduler with identical weights and tie handling.\hfill$\square$
+
+\paragraph{Witness choice and canonicalization.}
+Two solutions of $Az=t$ differ by a vector in $\ker A$. Their logical images can differ, as Eq.~\eqref{eq:toy} demonstrates. Accordingly, feasibility-oracle equivalence alone cannot transfer a failure rate from one witness policy to another. To reproduce a fixed rebuilding HUF implementation exactly, retain the same terminal clusters and their eligible column sets, then run its specified deterministic Gaussian-elimination rule once on each terminal system. The resulting correction vector is identical, provided all solution-selection details, including free variables and column order, are fixed. A different reliability-ordered optimization postprocessor is not covered merely by naming it canonicalization; its cost must be accounted for separately.
+
+\paragraph{No unrestricted reuse across targets or bands.}
+Persistence in the theorem is within one fixed conditional solve. When a new shot or an overlapping repair changes $t_J$, the old residual/witness does not automatically satisfy Eq.~\eqref{eq:invariant}. It must be recomputed or explicitly rebased. Changing $J$ can change the graph and growth trajectory; deleting columns cannot be handled by the merge-only proof. Disjoint components inside one solve have disjoint detector support, whereas distinct Seamwise bands may share detector rows. They therefore run separate oracle states; Theorem~\ref{thm:commute}, rather than direct basis concatenation across bands, justifies their concurrent execution.
+
+\section{Complexity derivations and scope}\label{app:complexity}
+\subsection{Representation and graph size}
+Fix one call with $m$ nonzero fault columns. Assume maximum detector-row degree $\Delta_c$ and column degree $\Delta_e$ are constants independent of circuit size. Remove zero-degree zero-target rows; any zero-degree nonzero-target row is infeasible. For a retained graph with $n$ checks, $v=n+m$ vertices, and $E=\operatorname{nnz}(A)$ incidences,
+\[n\le E\le\Delta_e m,\qquad v=O(m),\quad E=O(m).\]
+This is why the relevant graph size includes both checks and mechanisms, yet can be expressed as $O(m)$ under bounded column degree. Transversality alone does not establish this degree assumption for arbitrary propagated circuit faults.
+
+We count word-RAM operations with $O(\log(N_f+N_{\rm det}+2))$-bit indices and bounded-precision scheduler scalars. Store check vectors and coefficient certificates as sorted support-index lists. In a component of size $s$, every such list has at most $s$ entries. Symmetric-difference XOR costs $O(s)$ word operations. The analyzed DSU uses union by size or rank together with path compression; a separate minimum-vertex label supplies deterministic scheduler ties independently of the DSU representative. A full global $N_f$-bit vector per basis element is not the representation underlying the cluster-sensitive theorem. Literal bit-complexity includes an additional index-width factor; arbitrary-precision likelihood arithmetic requires its own cost model.
+
+\subsection{Eliminate each eligible column once}
+A component never splits. Lemma~\ref{lem:merge} therefore permits at most $m$ column activations in a call. In a component of size $s\le K$, insertion performs at most $s$ pivot tests and at most $s$ XORs of detector/coefficient vector pairs. Sorted supports make each operation at most $O(s)$, including membership tests if done naively. Thus insertion costs $O(s^2)$, and all insertions cost $O(mK^2)$.
+
+At most $v-1=O(m)$ successful component unions occur. Merging pivot lists, support lists, residuals, and witnesses costs $O(s)$ per union. A simple implementation also scans the merged component's fault vertices and tests all adjacent-check DSU roots to detect newly internal columns. Bounded degree gives $O(s)$ root queries per union. Across the run these costs are $O(mK)$ explicit work and $O(mK\alpha(m))$ amortized DSU work. Already activated columns are skipped for elimination even if scanned again.
+
+\subsection{The weighted scheduler being bounded}
+Use nonnegative finite boundary weights and select the smallest unsatisfied component, with a fixed deterministic tie rule. These growth weights may be derived from posterior reliabilities and are distinct from the fixed prior weights used for acceptance. Scan all of the selected component's current boundary incidences, discard incidences whose endpoints are already connected, find the minimum residual growth time, advance its boundary clocks, and merge all newly saturated boundaries. A nonterminal step effects a successful union; since the full local problem is feasible by Eq.~\eqref{eq:incumbenttarget}, an unsatisfied component with no boundary cannot persist. Thus there are $O(m)$ growth steps. Each selected component has at most $K$ vertices and $O(K)$ incidences under bounded degree. Boundary scans and DSU queries total $O(mK\alpha(m))$.
+
+Maintain unsatisfied components in a priority queue keyed by size and deterministic label. Retiring/adding component entries only at a growth selection or merge uses $O(m)$ heap operations overall; lazy entries must likewise be bounded by those events. Queue work is $O(m\log(m+2))$. No priority-queue decrease-key is charged for every scanned incidence: boundary times are computed by scans. A scheduler that performs more updates must include them explicitly. These assumptions define the analyzed implementation and do not assert the same overhead for every weighted-HUF program.
+
+\subsection{Single-call and composed bounds}
+Combining algebra and growth yields
+\begin{align*}
+T_a=O\big(&Im+mK^2+mK\alpha(m)\\
+&+m\log(m+2)\big).
+\end{align*}
+The cross term satisfies $K\alpha(m)\le(K^2+\alpha(m)^2)/2$, and $\alpha(m)^2=O(\log(m+2))$. This gives the summand in Eq.~\eqref{eq:workexact}. A terminal cluster of size $s$ needs $O(s^3)$ work for optional canonical Gaussian elimination. Terminal clusters are disjoint and $s\le K$, so
+\begin{equation}\sum_{S\,\rm terminal}|S|^3\le K^2\sum_{S\,\rm terminal}|S|=O(mK^2).\label{eq:canonicalcost}\end{equation}
+The per-call basis storage is $O(\sum_{S\,\rm current}|S|^2)\le O(mK)$. The graph, DSU, queue, residuals, and witness supports need no larger asymptotic space. BP with $I$ constant-time message sweeps costs $O(Im)$ on a bounded-degree graph.
+
+Sum the call costs to prove Eq.~\eqref{eq:workexact}, then use $K_a\le K_*$, $m_a\le W$, and $\sum_a m_a=W$ to obtain Eq.~\eqref{eq:work}. A sequential execution retains the global incumbent and one call's state at a time. Concurrent bands instead require the sum of their active local state sizes. Offline computation of $\rho(J)$ and the optional exposed-reach instrumentation are excluded from the core oracle bound and charged below.
+
+\paragraph{Sharper cluster-volume accounting.}
+Let $\mathcal T_a$ be the final Tanner components in call $a$, including untouched singletons. Every earlier component lies within one terminal component. Writing $s_C=|C|$, the same charging argument gives the finer bound
+\begin{equation}
+T_a=O\!\left(Im_a+m_a\log(m_a+2)+\sum_{C\in\mathcal T_a}s_C^3\right).\label{eq:volume}
+\end{equation}
+Indeed, each terminal component contains at most $s_C$ inserted columns and successful unions, each with at most $O(s_C^2)$ combined algebra/scan cost; the DSU factor is absorbed since $\alpha(s_C)=O(s_C)$. This bound accounts for small clusters individually instead of charging every column at the largest observed $K_a$. It is still an upper bound, not a measured runtime law.
+
+\subsection{Repair work versus complete decoder work}
+Let $T_{\rm init}$ be the ownership pass including any initial global fallback, $T_{\rm prep}$ model construction and offline rank computation, and $T_{\rm extra}$ proposal search and wrapper/observable instrumentation beyond persistent HUF and terminal canonicalization. Then
+\[T_{\rm total}=T_{\rm prep}+T_{\rm init}+T_{\rm repair}+T_{\rm extra}.\]
+No term can be silently removed by calling the scheme local. For a prespecified number of passes and bounded column-visit multiplicity $\mu$, $W\le\mu N_f$. For a single disjoint radius-one batch, $\mu\le1$ after zero columns are fixed. More general overlapping bands require an explicit multiplicity count.
+
+Strict configuration-cost descent ensures finitely many accepted updates, but permits as many as $2^{N_f}-1$ distinct accepted transitions in the absence of stronger structure. Rejected revisits need not terminate at all without a stopping policy. Consequently the work theorem is parameterized by actual or budgeted $W$, not by an unproved polynomial convergence claim. The theorem also says nothing about how often a valid HUF proposal passes the likelihood filter.
+
+\begin{corollary}[All-stage HUF solve work]
+Suppose the initial pass and any global fallback also use the analyzed persistent HUF backend. Let $W_{\rm all}$ sum fault-column incidences over initial, fallback, and repair solves, and let $K_{\rm all}$ be their maximum cluster size. If an infeasible local solve terminates when an unsatisfied component has no boundary, then the total HUF solve work is
+\[
+O\!\left(IW_{\rm all}+W_{\rm all}K_{\rm all}^{2}+W_{\rm all}\log(W_{\rm all}+2)\right).
+\]
+For core width two, zero halo, one radius-one repair pass, and at most one initial global fallback, $W_{\rm all}\le3N_f$.
+\end{corollary}
+\begin{proof}
+A solve that declares infeasibility makes no more growth events or insertions than the same merge-only analysis allows; the failure branch terminates that call. Sum the per-call bound over all stages. Zero-halo initial cores have disjoint column ownership and visit at most $N_f$ columns in total; a single global fallback visits at most $N_f$; radius-one bands between width-two cores are pairwise disjoint and visit at most $N_f$. Their sum gives the incidence bound. Model preparation, offline ranks, and additional wrapper/observable instrumentation are charged separately.
+\end{proof}
+The global fallback can determine $K_{\rm all}$, so the incidence bound alone does not imply a small-cluster regime. The measured full-call latency also includes policy bookkeeping and logical-event construction; the solve-work bound does not erase those costs.
+
+\subsection{Conditional small-cluster regime}
+For a fixed repair schedule, suppose a run-dependent $K_*$ satisfies
+\[\Pr(K_*\ge k)\le\min\{1,CW e^{-ck}\},\qquad c,C>0,\]
+with constants independent of size and a deterministic $W$ (or a uniform tail conditional on that $W$). Set $k_0=\lceil c^{-1}\log(CW+2)\rceil$. The tail identity
+\[\mathbb E[K_*^2]=\sum_{k\ge1}(2k-1)\Pr(K_*\ge k)\]
+gives $O(\log^2(W+2))$: the initial part is $O(k_0^2)$, and the remaining geometric tail is $O(k_0+1)$. Therefore
+\[\mathbb E[T_{\rm repair}]=O\!\left(IW+W\log^2(W+2)\right).\]
+An exponential cluster tail is an explicit additional hypothesis. A quantum decoding threshold or sparse physical noise by itself is not a proof of that tail for the chosen circuit, posterior weights, and HUF schedule. Existing compact-code observations are insufficient to establish it.
+
+\subsection{A local-circuit criterion for bounded detector degree}
+\begin{lemma}[Consecutive-slice detector locality]
+Consider identical CSS blocks with uniformly bounded stabilizer weight and qubit--check incidence, bounded-depth stabilizer extraction with bounded-arity gates, and at most one transversal CNOT matching between complete extraction slices. Measured X/Z checks use the same generator labels on matched blocks. Suppose each detector compares a current check measurement with its Clifford-propagated predecessor product, and the check history is reset to the latest record after each complete slice. Then row and column degrees of the detector matrix are bounded independently of block count, code distance and number of slices.
+\end{lemma}
+\begin{proof}
+A matching maps a check to a product on at most two blocks, so a detector uses a constant number of current/preceding check records. A Pauli fault before both compared extraction slices flips those records consistently under the tracked Clifford propagation and cancels in their detector parity. Its noncancelling noisy causal support is therefore confined to a constant number of adjacent bounded-depth extraction/matching circuits. Bounded gate arity and check weight imply that this support contains only a constant number of noisy locations. A constant number of elementary mechanisms per location gives a constant detector-row degree.
+Conversely, a fault location has a bounded forward light cone within those adjacent slices. Bounded qubit--check incidence limits the number of affected measurements, and a matching places each previous record in only a bounded number of next detector products. History reset prevents the detector effect from accumulating through arbitrarily many later slices. This bounds column degree as well. Boundary slices only omit predecessors and cannot enlarge the count.
+\end{proof}
+The generated surface-code family uses the same four extraction-CNOT layers at every distance and resets each check history after measurement. The phenomenological BB controls satisfy the corresponding bounded check-incidence/history argument directly: noisy data Pauli locations and readout flips touch bounded-weight stabilizers under the same matching/history rule. This does not assert a hardware extraction-depth result for BB circuits, which are not benchmarked here. These are the structural conditions used by the criterion; arbitrary deep transversal circuits without the intervening complete extraction/reset structure are not covered. The retained finite models independently record actual row/column degrees in the experiment archive. Logical-action signatures may propagate much farther, so the lemma does not impose a corresponding sparsity bound on $L$.
+
+\subsection{From mechanisms to transversal gate counts}
+Let $G$ count logical transversal CNOT instructions, $q(d)$ the data qubits in a participating block, and $n_r$ attributable syndrome rounds per gate. Assume a bounded number of participating blocks per instruction, $O(q(d))$ noisy physical locations per instruction and per syndrome round, $O(1)$ binary mechanisms per location, and initialization/closure volume no larger than the same asymptotic circuit volume. Then
+\[N_f=O(\mathcal A),\qquad\mathcal A=G(1+n_r)q(d).\]
+If the propagated detector matrices additionally retain uniformly bounded degree and visit multiplicity is at most $\mu$, Eq.~\eqref{eq:work} gives
+\begin{equation}
+T_{\rm repair}=O\!\left(\mu\mathcal A\,[I+K_*^2+\log(\mu\mathcal A+2)]\right).\label{eq:gate}
+\end{equation}
+For a surface-code family $q(d)=\Theta(d^2)$ may be substituted. It is not a general identity for all BB or other qLDPC families. A circuit with $G=0$ or significant independent memory volume should be parameterized directly by total noisy location count; the gate-volume relation above applies only when that volume assumption holds.
+
+\subsection{What is improved relative to a repeated solve}
+The published HUF analysis gives $O(M^3\log M)$ under its sparse-matrix assumptions~\cite{cain}; a naive dense solve after $O(M)$ merges gives $O(M^4)$. Persistent elimination gives deterministic $O(MK^2+M\log(M+2))$ for the analyzed scheduler, hence $O(M^3)$ in the full-cluster worst case. This removes repeated recomputation; it is not a proof that any physical experiment exhibits a cubic-to-linear runtime crossover. For Seamwise, $M$ is replaced call by call by the local mechanism count $m_a$, and repeated band visits remain charged in $W$.
+
+\section{Logical-reach certificates from dependent insertions}\label{app:reach}
+\subsection{Proof of Proposition~\ref{prop:exposed}}
+Order all inserted columns by their activation order, breaking simultaneous activations deterministically. A nonzero insertion creates an independent detector pivot; a zero insertion produces a relation $k_j$ containing coefficient one on the new column $j$ and using only previously inserted columns otherwise. Because dependent columns are never added as detector pivots, the coefficients used to eliminate a later column can be chosen on the independent inserted columns alone.
+
+Each dependent $k_j$ has a unique newly introduced dependent-column coordinate. The collection of these relations is linearly independent by triangularity in activation order. If $r=\rank D_{:,F}$, there are exactly $|F|-r$ dependent insertions. Their number equals $\dim\ker D_{:,F}$, so they form a kernel basis. The argument is unaffected by component merges: inherited pivot vectors remain valid, and all activated columns are eventually part of $F$.
+
+Applying the linear map $L$ to that kernel basis yields a spanning set of $L_{:,F}(\ker D_{:,F})$. Zero extension from $F$ to $J$ proves inclusion in $\reach(J)$. Because the smaller space is a subspace of the larger one, equal dimensions imply equal spaces. This proves Eq.~\eqref{eq:active}. Logical images can be dependent or zero even when the detector-kernel relations are independent; a separate logical-space rank reduction is required.\hfill$\square$
+
+\subsection{Component images need not be independent}
+For final components $C$, their eligible detector-column supports are disjoint and
+\[\ker D_{:,F}=\bigoplus_C\ker D_{:,F_C}.\]
+Nevertheless,
+\[\reach_{\rm act}(F)=\sum_C L_{:,F_C}(\ker D_{:,F_C})\]
+is generally a sum, not a direct sum, in logical-coordinate space. Two components can realize the same logical-output change. Therefore summing componentwise logical ranks can overcount; the logical images must be reduced in their shared output coordinates. This is distinct from Seamwise's disjoint-detector-support invariant.
+
+\subsection{Optional instrumentation cost}
+Let $q_a$ be the number of nonzero logical rows of $L_{:,J_a}$ and $r_a^{\ell}\le\min(q_a,m_a)$ the rank of the exposed logical image. For each dependent relation, its certificate has at most $K_a$ fault indices. Dense $q_a$-bit logical signatures can be formed in $O(q_aK_a)$ elementary operations, then reduced against a logical basis in $O(q_a\min(q_a,m_a))$. At most $m_a$ relations are emitted, giving a conservative extra cost
+\begin{equation}
+T_{\rm reach}=O\!\left(\sum_a m_aq_a[K_a+\min(q_a,m_a)]\right).\label{eq:reachcost}
+\end{equation}
+Keeping only independent logical images uses $O(q_ar_a^{\ell})$ entries per call, in addition to the persistent detector state and access to $L$. Coefficient witnesses for arbitrary requested logical offsets, if desired, require additional stored relations and are not included in this rank-only memory bound. No constant $q_a$ or bounded logical-signature degree is assumed implicitly.
+
+Offline full-band rank $\rho(J)$ is separate. Straight dense elimination of the stacked $D_J,L_{:,J}$ costs $O((|R(J)|+q_a)m_a\min(|R(J)|+q_a,m_a))$ elementary operations. This can be amortized over repeated shots on a fixed band, but cannot be hidden in a one-shot end-to-end latency claim. An implementation may obtain $\rho(J)$ by processing every band column and collecting dependent logical signatures with the same construction; that offline pass has its own charged work.
+
+\subsection{What full reach does and does not imply}
+Let $x$ and an ideal comparison correction $x^\star$ be syndrome-consistent. A replacement supported on $J$ can match the monitored logical output of $x^\star$ exactly when
+\[L(x+x^\star)\in\reach(J).\]
+This is an existence statement: an admissible difference must lie in $\ker D_J$, and its logical image is precisely an element of $\reach(J)$. If $\reach(J)=L(\ker D)$, every globally attainable logical offset is representable locally. Neither statement ensures that HUF finds it, that its configuration cost is lower, or that it belongs to the most probable logical class. The sampled logical truth is not an input to the repair algorithm.
+
+The active certificate applies to all corrections supported in $F$. A particular terminal-HUF witness policy may explore a still smaller set, because it fixes a solution within each terminal component. Thus $\rho_{\rm act}$ is an upper bound on policy-accessible logical choices; equality with $\rho(J)$ does not establish that the current proposal mechanism searches all of them. This distinction prevents an algebraic reach certificate from being presented as a decoding-accuracy theorem.
+
+\subsection{Reproducible finite algebra checks}
+The accompanying \texttt{verify\_integration.py} independently compares persistent validity with rebuilding, checks every returned witness, and compares the streamed logical-image rank against the stacked-rank identity. It covers all nonzero-column $2\times3$ binary matrices, all two-bit targets, all one-row logical maps, and three prescribed incidence orders, giving 2,592 small merge traces; a further 800 seeded traces use matrices with up to ten checks and sixteen fault columns. The run gives 19,721 oracle comparisons, 14,068 valid-witness checks, and 19,721 kernel/logical-rank checks, all without violations. The conditioned-band enumeration verifies 368 feasible replacements across 240 band/incumbent pairs in Eq.~\eqref{eq:toy}, and 1,024 disjoint-update compositions. The three-column example in Section~\ref{sec:work} yields the predicted exposed-rank transition $0\to1$. The generated \texttt{integration\_audit.json} records these counts and the script hash. These finite checks exercise the new implementation and certificate; the proofs above establish the general statements. The script does not sample a quantum circuit, run BP, or benchmark the source experiment counts.
+
+\section{Controlled circuit experiments and reproducibility}\label{app:study}
+\input{study_protocol}

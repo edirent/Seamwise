@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+frozen_manifest=${1:?Pass the frozen campaign manifest printed by seamwise-bench freeze}
+for mode in timing accuracy memory; do
+  scripts/seamwise-bench run --manifest "$frozen_manifest" --mode "$mode"
+done

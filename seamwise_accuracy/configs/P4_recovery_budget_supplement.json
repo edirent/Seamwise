@@ -1,0 +1,13 @@
+{
+  "reason": "An externally interrupted worker required a full unchanged-configuration retry, consuming previously reserved computation",
+  "policy_data_source_changes": false,
+  "fixed_primary_n": 8000,
+  "maximum_accounted_active_wall_s": 18000,
+  "rule": "After the existing recovery supervisor finishes, use only remaining accounted active budget to retry incomplete primary points at their full frozen N; never inspect logical failure counts to choose retries",
+  "priority": "WORKS order, then original, selected_combined, baseline_tesseract",
+  "runtime_forecast": "512-shot validation mean times remaining IDs, factor 1.25; 60-second checkpoint validation/preparation allowance; full-count forecast for clean retries",
+  "duplicates": "Retain all prior raw journals; compare overlapping predictions exactly; never increase independent N",
+  "timing": "No retries run concurrently with the dedicated timing or memory phase",
+  "historical_budget_limitation": "Uncommitted pre-interruption in-flight CPU is unknown, as documented in P4_recovery_plan.json",
+  "checkpoint_continuation": "If a stage watchdog leaves Tesseract incomplete, retain its immutable prefix, replay 16 predetermined checkpoint IDs to verify predictions, then decode only remaining IDs with the same frozen factory/configuration and original ID permutation. Full unique N remains 8000. This is accuracy-only; mixed-process timings are auxiliary and whole-cohort RSS high water is unavailable."
+}

@@ -1,0 +1,48 @@
+         10106395 function calls (10106377 primitive calls) in 4.027 seconds
+
+   Ordered by: cumulative time
+   List reduced from 185 to 40 due to restriction <40>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        8    0.001    0.000    4.026    0.503 /workspace/scratch/e9d22d990208/output/seamwise_study/research/decoders.py:131(decode)
+       24    0.306    0.013    4.013    0.167 /workspace/scratch/e9d22d990208/output/seamwise_study/bp_huf.py:19(decode)
+       24    0.050    0.002    3.639    0.152 /workspace/scratch/e9d22d990208/output/seamwise_study/huf.py:32(decode)
+       24    1.124    0.047    3.588    0.150 /workspace/scratch/e9d22d990208/output/seamwise_study/huf.py:38(_decode)
+        8    0.001    0.000    3.080    0.385 /workspace/scratch/e9d22d990208/output/seamwise_study/research/decoders.py:116(cut)
+   228918    0.667    0.000    0.667    0.000 /workspace/scratch/e9d22d990208/output/seamwise_study/algebra.py:41(__init__)
+  5881258    0.584    0.000    0.584    0.000 /workspace/scratch/e9d22d990208/output/seamwise_study/huf.py:44(root)
+     5848    0.120    0.000    0.519    0.000 /workspace/scratch/e9d22d990208/output/seamwise_study/huf.py:48(eligible)
+     5342    0.022    0.000    0.441    0.000 /workspace/scratch/e9d22d990208/output/seamwise_study/bp_huf.py:15(fresh)
+   271478    0.072    0.000    0.381    0.000 {built-in method builtins.all}
+    81639    0.237    0.000    0.380    0.000 /workspace/scratch/e9d22d990208/output/seamwise_study/algebra.py:50(insert)
+   875618    0.195    0.000    0.327    0.000 /workspace/scratch/e9d22d990208/output/seamwise_study/huf.py:49(<genexpr>)
+    92235    0.219    0.000    0.229    0.000 {built-in method builtins.sorted}
+     5259    0.103    0.000    0.194    0.000 {built-in method builtins.min}
+  1383867    0.091    0.000    0.091    0.000 /workspace/scratch/e9d22d990208/output/seamwise_study/huf.py:57(<genexpr>)
+   589293    0.066    0.000    0.066    0.000 {built-in method builtins.max}
+     5366    0.023    0.000    0.045    0.000 {built-in method builtins.sum}
+       24    0.014    0.001    0.038    0.002 {built-in method numpy.fromiter}
+     5848    0.020    0.000    0.028    0.000 /workspace/scratch/e9d22d990208/output/seamwise_study/algebra.py:68(merge)
+   165912    0.024    0.000    0.024    0.000 /workspace/scratch/e9d22d990208/output/seamwise_study/huf.py:88(<genexpr>)
+   122319    0.014    0.000    0.014    0.000 /workspace/scratch/e9d22d990208/output/seamwise_study/huf.py:77(<genexpr>)
+    81639    0.010    0.000    0.010    0.000 /workspace/scratch/e9d22d990208/output/seamwise_study/bp_huf.py:17(<lambda>)
+    81639    0.010    0.000    0.010    0.000 {method 'add' of 'set' objects}
+    51864    0.008    0.000    0.008    0.000 /workspace/scratch/e9d22d990208/output/seamwise_study/huf.py:47(<genexpr>)
+    68887    0.008    0.000    0.008    0.000 {method 'bit_length' of 'int' objects}
+      119    0.000    0.000    0.006    0.000 /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/scipy/sparse/_base.py:919(__matmul__)
+       16    0.000    0.000    0.006    0.000 /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/scipy/sparse/_index.py:29(__getitem__)
+      119    0.000    0.000    0.005    0.000 /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/scipy/sparse/_base.py:788(_matmul_dispatch)
+       16    0.000    0.000    0.005    0.000 /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/scipy/sparse/_csr.py:274(_get_sliceXarray)
+       16    0.000    0.000    0.005    0.000 /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/scipy/sparse/_compressed.py:651(_minor_index_fancy)
+    11696    0.005    0.000    0.005    0.000 {method 'pop' of 'dict' objects}
+      119    0.001    0.000    0.004    0.000 /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/scipy/sparse/_compressed.py:387(_matmul_vector)
+    24704    0.004    0.000    0.004    0.000 {method 'append' of 'list' objects}
+    11696    0.003    0.000    0.003    0.000 {method 'isdisjoint' of 'set' objects}
+       24    0.002    0.000    0.002    0.000 {method 'copy' of 'list' objects}
+    17463    0.002    0.000    0.002    0.000 {built-in method builtins.len}
+    11697    0.002    0.000    0.002    0.000 {method 'keys' of 'dict' objects}
+       71    0.002    0.000    0.002    0.000 {built-in method scipy.sparse._sparsetools.csr_matvec}
+     5848    0.002    0.000    0.002    0.000 {method 'isdisjoint' of 'dict_keys' objects}
+     5898    0.002    0.000    0.002    0.000 {built-in method _heapq.heappop}
+
+

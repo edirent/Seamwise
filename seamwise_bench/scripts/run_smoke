@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+dataset_manifest=${1:-results/20261109T191912Z-dataset-43f9bff8/manifest.json}
+exec scripts/seamwise-bench validate --manifest "$dataset_manifest" --config configs/smoke.yaml

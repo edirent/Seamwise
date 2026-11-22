@@ -1,0 +1,14 @@
+\subsection{Independent-process timing replication}
+Three fresh-process replicates follow the controlled pilot at the primary surface-code point and the high-noise BB144 point. Each uses the same first 64 inputs with randomized method order. These are additional timing executions, not new independent logical samples. All repeated predictions match the corresponding stored single-pass predictions.
+\begin{table*}[t]\centering\scriptsize
+\caption{Three independently initialized timing replicates on 64 reused inputs per operating point. RSS is the maximum separately sampled whole-process footprint across replicates.}\label{tab:replication}
+\begin{tabular}{llrrrrr}\toprule Point&Backend&Run 1 mean ms&Run 2&Run 3&Pooled p95 ms&Max RSS MiB\\\midrule
+BB144&BPHUF&347.53&347.53&348.37&601.85&137.7\\
+BB144&BPSW&285.45&288.64&283.37&454.90&137.7\\
+BB144&Tesseract&55.98&55.41&59.46&69.05&117.1\\
+Surface d5&BPHUF&132.92&130.67&133.22&343.95&112.4\\
+Surface d5&BPSW&122.26&119.00&123.61&328.14&111.8\\
+Surface d5&Tesseract&117.66&113.71&115.00&246.90&106.8\\
+\bottomrule\end{tabular}\end{table*}
+The median paired reduction in mean latency is 8.0\% at the surface-code point and 17.9\% at the BB144 point. The corresponding whole-process RSS measurements show little change between oracle modes. Native Tesseract remains a stronger accuracy comparator on these samples; the timing table also exposes dependence on which fixed sample subset is measured.
+A separate diagnostic on eight fixed high-noise BB144 inputs records 81,639 rebuilding basis-insertion calls and 3,100 persistent calls, a 26.3-fold reduction in this repeated-column-processing counter. Both diagnostic outputs are identical. The instrumented times are excluded from benchmark latency. Profiling identifies repeated component creation, DSU root queries and eligibility scans as substantial remaining costs; those paths are preserved by the current oracle replacement.

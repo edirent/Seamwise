@@ -1,0 +1,366 @@
+{
+  "count": 128,
+  "point_cap": 240,
+  "wall_cap": 1800,
+  "configs": {
+    "surface_d3_p0.003_B4": [
+      {
+        "name": "original",
+        "kind": "original",
+        "family": "bphuf",
+        "persistent": true,
+        "policy": "repair1"
+      },
+      {
+        "name": "bp_reference",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.625,
+        "iterations": 30,
+        "damping": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "bp_norm08",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "bp_norm10",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 1.0,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "bp_damp08",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "bp_serial",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.625,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "serial"
+      },
+      {
+        "name": "bp_norm05",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.5,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "band_lsd2",
+        "kind": "new",
+        "policy": "repair1",
+        "band_family": "lsd",
+        "band_iterations": 60,
+        "band_order": 2,
+        "iterations": 30
+      },
+      {
+        "name": "band_osd0",
+        "kind": "new",
+        "policy": "repair1",
+        "band_family": "osd",
+        "band_iterations": 60,
+        "band_order": 0,
+        "iterations": 30
+      },
+      {
+        "name": "band_osd2",
+        "kind": "new",
+        "policy": "repair1",
+        "band_family": "osd",
+        "band_iterations": 60,
+        "band_order": 2,
+        "iterations": 30
+      },
+      {
+        "beam_climbing": true,
+        "det_beam": 10,
+        "kind": "tesseract",
+        "name": "baseline_tesseract",
+        "no_revisit_dets": true,
+        "pqlimit": 200000
+      },
+      {
+        "iterations": 60,
+        "kind": "lsd",
+        "name": "baseline_lsd",
+        "order": 2,
+        "schedule": "serial"
+      },
+      {
+        "iterations": 30,
+        "kind": "osd",
+        "name": "baseline_osd",
+        "order": 2,
+        "schedule": "parallel"
+      },
+      {
+        "kind": "relay",
+        "name": "baseline_relay",
+        "num_sets": 10,
+        "pre_iter": 30,
+        "precision": "F64",
+        "seed": 20261109,
+        "set_max_iter": 30,
+        "stop_nconv": 1
+      },
+      {
+        "ensemble": 1,
+        "iterations": 400,
+        "kind": "gari",
+        "name": "baseline_gari",
+        "scale": 0.96875,
+        "schedule": 1,
+        "seed": 1,
+        "stopping": "two_sector"
+      }
+    ],
+    "surface_d5_p0.006_B4": [
+      {
+        "name": "original",
+        "kind": "original",
+        "family": "bphuf",
+        "persistent": true,
+        "policy": "repair1"
+      },
+      {
+        "name": "bp_reference",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.625,
+        "iterations": 30,
+        "damping": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "bp_norm08",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "bp_norm10",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 1.0,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "bp_damp08",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "bp_serial",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.625,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "serial"
+      },
+      {
+        "name": "bp_norm05",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.5,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "band_lsd2",
+        "kind": "new",
+        "policy": "repair1",
+        "band_family": "lsd",
+        "band_iterations": 60,
+        "band_order": 2,
+        "iterations": 30
+      },
+      {
+        "name": "band_osd0",
+        "kind": "new",
+        "policy": "repair1",
+        "band_family": "osd",
+        "band_iterations": 60,
+        "band_order": 0,
+        "iterations": 30
+      },
+      {
+        "beam_climbing": true,
+        "det_beam": 20,
+        "kind": "tesseract",
+        "name": "baseline_tesseract",
+        "no_revisit_dets": true,
+        "pqlimit": 1000000
+      },
+      {
+        "iterations": 60,
+        "kind": "lsd",
+        "name": "baseline_lsd",
+        "order": 2,
+        "schedule": "serial"
+      },
+      {
+        "iterations": 60,
+        "kind": "osd",
+        "name": "baseline_osd",
+        "order": 2,
+        "schedule": "serial"
+      },
+      {
+        "name": "baseline_relay",
+        "kind": "relay",
+        "deferred": "No complete zero-invalid prior operating point. New bounded validation of the recorded strongest effort remains required before inferential comparison."
+      },
+      {
+        "name": "baseline_gari",
+        "kind": "gari",
+        "deferred": "No complete zero-invalid prior operating point. New bounded validation of the recorded strongest effort remains required before inferential comparison."
+      }
+    ],
+    "bb144_p0.015_B4": [
+      {
+        "name": "original",
+        "kind": "original",
+        "family": "bphuf",
+        "persistent": true,
+        "policy": "repair2"
+      },
+      {
+        "name": "bp_reference",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.625,
+        "iterations": 30,
+        "damping": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "bp_norm08",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "bp_norm10",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 1.0,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "bp_damp08",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "bp_serial",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.625,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "serial"
+      },
+      {
+        "name": "bp_norm05",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.5,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "band_lsd2",
+        "kind": "new",
+        "policy": "repair2",
+        "band_family": "lsd",
+        "band_iterations": 60,
+        "band_order": 2,
+        "iterations": 30
+      },
+      {
+        "name": "band_osd0",
+        "kind": "new",
+        "policy": "repair2",
+        "band_family": "osd",
+        "band_iterations": 60,
+        "band_order": 0,
+        "iterations": 30
+      },
+      {
+        "beam_climbing": true,
+        "det_beam": 10,
+        "kind": "tesseract",
+        "name": "baseline_tesseract",
+        "no_revisit_dets": true,
+        "pqlimit": 200000
+      },
+      {
+        "iterations": 60,
+        "kind": "lsd",
+        "name": "baseline_lsd",
+        "order": 2,
+        "schedule": "parallel"
+      },
+      {
+        "iterations": 30,
+        "kind": "osd",
+        "name": "baseline_osd",
+        "order": 0,
+        "schedule": "parallel"
+      },
+      {
+        "name": "baseline_relay",
+        "kind": "relay",
+        "deferred": "No complete zero-invalid prior operating point. New bounded validation of the recorded strongest effort remains required before inferential comparison."
+      },
+      {
+        "name": "baseline_gari",
+        "kind": "gari",
+        "deferred": "No complete zero-invalid prior operating point. New bounded validation of the recorded strongest effort remains required before inferential comparison."
+      }
+    ]
+  },
+  "design": "six fixed BP presets plus fixed stronger-band solvers; no Cartesian grid; external settings inherited from prior validation, never final outcomes"
+}

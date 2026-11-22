@@ -1,0 +1,17 @@
+workloads: [surface_d3_p0.003_B4, surface_d5_p0.006_B4, bb144_p0.015_B4]
+count: 128
+warmup: 16
+repetitions: 1
+budgets: {preparation: 30, decode: 90, memory: 45}
+stage_wall_budgets: {memory: 300}
+claim_scope: diagnostic revision allocation control on the full 128-ID engineering validation corpus; not final latency, not the independent accuracy corpus
+backends:
+- {name: v1_rebuild, kind: native, build: build_v1, family: bphuf, policy: repair1, persistent: false}
+- {name: v1_persistent, kind: native, build: build_v1, family: bphuf, policy: repair1, persistent: true}
+- {name: v2_rebuild, kind: native, build: build_v2, family: bphuf, policy: repair1, persistent: false}
+- {name: v2_persistent, kind: native, build: build_v2, family: bphuf, policy: repair1, persistent: true}
+- {name: v3_rebuild, kind: native, build: build_v3, family: bphuf, policy: repair1, persistent: false}
+- {name: v3_persistent, kind: native, build: build_v3, family: bphuf, policy: repair1, persistent: true}
+- {name: v4_rebuild, kind: native, family: bphuf, policy: repair1, persistent: false}
+- {name: v4_persistent, kind: native, family: bphuf, policy: repair1, persistent: true}
+- {name: packed_terminal, kind: native, family: bphuf, policy: repair1, persistent: true, dense_terminal: true}

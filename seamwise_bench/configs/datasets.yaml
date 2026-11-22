@@ -1,0 +1,14 @@
+workloads:
+- surface_d3_p0.003_B4
+- surface_d5_p0.006_B4
+- bb144_p0.015_B4
+samples:
+  validation: 128
+  timing: 1024
+  test: 10000
+seeds:
+  validation: 112620261109
+  timing: 512620261109
+  test: 312620261109
+noise_semantics: surface circuit-level; BB phenomenological data Pauli and readout
+  noise; never aggregate them as a common threshold family

@@ -1,0 +1,761 @@
+{
+  "created_utc": "2026-11-10T10:54:56Z",
+  "status": "FROZEN_BEFORE_CONFIRMATORY_ACCESS",
+  "primary_count": 8000,
+  "secondary_count": 2000,
+  "timing_count": 1024,
+  "timing_repetitions": 3,
+  "memory_count": 512,
+  "memory_scope": "full 512-ID validation corpus, two independent/repeated-syndrome soak cycles; separate instrumentation",
+  "max_wall_s": 18000,
+  "primary_configs": {
+    "surface_d3_p0.003_B4": [
+      {
+        "name": "original",
+        "kind": "original",
+        "family": "bphuf",
+        "persistent": true,
+        "policy": "repair1"
+      },
+      {
+        "name": "selected_combined",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 2,
+        "selection": "cost",
+        "depth": 2,
+        "max_calls": 2
+      },
+      {
+        "beam_climbing": true,
+        "det_beam": 10,
+        "kind": "tesseract",
+        "name": "baseline_tesseract",
+        "no_revisit_dets": true,
+        "pqlimit": 200000
+      }
+    ],
+    "surface_d5_p0.006_B4": [
+      {
+        "name": "original",
+        "kind": "original",
+        "family": "bphuf",
+        "persistent": true,
+        "policy": "repair1"
+      },
+      {
+        "name": "selected_combined",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 30,
+        "candidate": true,
+        "K": 8,
+        "selection": "cost",
+        "adaptive": true,
+        "radius": 1,
+        "depth": 2,
+        "max_calls": 2
+      },
+      {
+        "beam_climbing": true,
+        "det_beam": 20,
+        "kind": "tesseract",
+        "name": "baseline_tesseract",
+        "no_revisit_dets": true,
+        "pqlimit": 1000000
+      }
+    ],
+    "bb144_p0.015_B4": [
+      {
+        "name": "original",
+        "kind": "original",
+        "family": "bphuf",
+        "persistent": true,
+        "policy": "repair2"
+      },
+      {
+        "name": "selected_combined",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "beam_climbing": true,
+        "det_beam": 10,
+        "kind": "tesseract",
+        "name": "baseline_tesseract",
+        "no_revisit_dets": true,
+        "pqlimit": 200000
+      }
+    ]
+  },
+  "secondary_configs": {
+    "surface_d3_p0.003_B4": [
+      {
+        "name": "best_bp",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.625,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "serial"
+      },
+      {
+        "name": "stronger_solver",
+        "kind": "new",
+        "policy": "repair1",
+        "band_family": "osd",
+        "band_iterations": 60,
+        "band_order": 0,
+        "iterations": 30
+      },
+      {
+        "name": "multi_candidate",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 2,
+        "selection": "cost",
+        "depth": 2,
+        "max_calls": 2
+      },
+      {
+        "name": "adaptive_radius",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 8,
+        "selection": "cost",
+        "adaptive": true,
+        "radius": 1,
+        "depth": 2,
+        "max_calls": 2
+      },
+      {
+        "name": "matched_joint",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 2,
+        "selection": "cost",
+        "depth": 2,
+        "max_calls": 2,
+        "joint": true,
+        "adaptive": false,
+        "radius": 2
+      },
+      {
+        "name": "matched_cut",
+        "kind": "new",
+        "policy": "cut",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "same_BP_fixed_radius",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "same_BP_radius2",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "same_BP_joint",
+        "kind": "new",
+        "policy": "joint",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "strong_joint",
+        "kind": "new",
+        "policy": "joint",
+        "iterations": 60,
+        "family": "osd",
+        "order": 0
+      },
+      {
+        "name": "strong_cut",
+        "kind": "new",
+        "policy": "cut",
+        "iterations": 60,
+        "family": "osd",
+        "order": 0
+      },
+      {
+        "name": "strong_all_repair",
+        "kind": "new",
+        "policy": "repair1",
+        "iterations": 60,
+        "family": "osd",
+        "order": 0
+      },
+      {
+        "iterations": 60,
+        "kind": "lsd",
+        "name": "baseline_lsd",
+        "order": 2,
+        "schedule": "serial"
+      },
+      {
+        "iterations": 30,
+        "kind": "osd",
+        "name": "baseline_osd",
+        "order": 2,
+        "schedule": "parallel"
+      },
+      {
+        "kind": "relay",
+        "name": "baseline_relay",
+        "num_sets": 10,
+        "pre_iter": 30,
+        "precision": "F64",
+        "seed": 20261109,
+        "set_max_iter": 30,
+        "stop_nconv": 1
+      }
+    ],
+    "surface_d5_p0.006_B4": [
+      {
+        "name": "best_bp",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.625,
+        "iterations": 60,
+        "damping": 0,
+        "schedule": "serial"
+      },
+      {
+        "name": "stronger_solver",
+        "kind": "new",
+        "policy": "repair1",
+        "band_family": "lsd",
+        "band_iterations": 60,
+        "band_order": 2,
+        "iterations": 30
+      },
+      {
+        "name": "multi_candidate",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 30,
+        "candidate": true,
+        "K": 2,
+        "selection": "cost",
+        "depth": 2,
+        "max_calls": 2
+      },
+      {
+        "name": "adaptive_radius",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 30,
+        "candidate": true,
+        "K": 8,
+        "selection": "cost",
+        "adaptive": true,
+        "radius": 1,
+        "depth": 2,
+        "max_calls": 2
+      },
+      {
+        "name": "matched_joint",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 30,
+        "candidate": true,
+        "K": 8,
+        "selection": "cost",
+        "adaptive": false,
+        "radius": 2,
+        "depth": 2,
+        "max_calls": 2,
+        "joint": true
+      },
+      {
+        "name": "matched_cut",
+        "kind": "new",
+        "policy": "cut",
+        "scale": 0.8,
+        "iterations": 30
+      },
+      {
+        "name": "same_BP_fixed_radius",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 30
+      },
+      {
+        "name": "same_BP_radius2",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 30
+      },
+      {
+        "name": "same_BP_joint",
+        "kind": "new",
+        "policy": "joint",
+        "scale": 0.8,
+        "iterations": 30
+      },
+      {
+        "name": "strong_joint",
+        "kind": "new",
+        "policy": "joint",
+        "iterations": 60,
+        "family": "lsd",
+        "order": 2
+      },
+      {
+        "name": "strong_cut",
+        "kind": "new",
+        "policy": "cut",
+        "iterations": 60,
+        "family": "lsd",
+        "order": 2
+      },
+      {
+        "name": "strong_all_repair",
+        "kind": "new",
+        "policy": "repair1",
+        "iterations": 60,
+        "family": "lsd",
+        "order": 2
+      },
+      {
+        "iterations": 60,
+        "kind": "lsd",
+        "name": "baseline_lsd",
+        "order": 2,
+        "schedule": "serial"
+      },
+      {
+        "iterations": 60,
+        "kind": "osd",
+        "name": "baseline_osd",
+        "order": 2,
+        "schedule": "serial"
+      }
+    ],
+    "bb144_p0.015_B4": [
+      {
+        "name": "best_bp",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "stronger_solver",
+        "kind": "new",
+        "policy": "repair2",
+        "band_family": "osd",
+        "band_iterations": 60,
+        "band_order": 0,
+        "iterations": 30
+      },
+      {
+        "name": "multi_candidate",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 2,
+        "selection": "class_mass",
+        "depth": 2,
+        "max_calls": 2
+      },
+      {
+        "name": "adaptive_radius",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 8,
+        "selection": "class_mass",
+        "adaptive": true,
+        "radius": 1,
+        "depth": 2,
+        "max_calls": 2
+      },
+      {
+        "name": "matched_joint",
+        "kind": "new",
+        "policy": "joint",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "joint": true,
+        "adaptive": false,
+        "radius": 2
+      },
+      {
+        "name": "matched_cut",
+        "kind": "new",
+        "policy": "cut",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "same_BP_fixed_radius",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "same_BP_radius2",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "same_BP_joint",
+        "kind": "new",
+        "policy": "joint",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "strong_joint",
+        "kind": "new",
+        "policy": "joint",
+        "iterations": 60,
+        "family": "osd",
+        "order": 0
+      },
+      {
+        "name": "strong_cut",
+        "kind": "new",
+        "policy": "cut",
+        "iterations": 60,
+        "family": "osd",
+        "order": 0
+      },
+      {
+        "name": "strong_all_repair",
+        "kind": "new",
+        "policy": "repair2",
+        "iterations": 60,
+        "family": "osd",
+        "order": 0
+      },
+      {
+        "iterations": 60,
+        "kind": "lsd",
+        "name": "baseline_lsd",
+        "order": 2,
+        "schedule": "parallel"
+      },
+      {
+        "iterations": 30,
+        "kind": "osd",
+        "name": "baseline_osd",
+        "order": 0,
+        "schedule": "parallel"
+      }
+    ]
+  },
+  "timing_configs": {
+    "surface_d3_p0.003_B4": [
+      {
+        "name": "original",
+        "kind": "original",
+        "family": "bphuf",
+        "persistent": true,
+        "policy": "repair1"
+      },
+      {
+        "name": "selected_combined",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 2,
+        "selection": "cost",
+        "depth": 2,
+        "max_calls": 2
+      }
+    ],
+    "surface_d5_p0.006_B4": [
+      {
+        "name": "original",
+        "kind": "original",
+        "family": "bphuf",
+        "persistent": true,
+        "policy": "repair1"
+      },
+      {
+        "name": "selected_combined",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 30,
+        "candidate": true,
+        "K": 8,
+        "selection": "cost",
+        "adaptive": true,
+        "radius": 1,
+        "depth": 2,
+        "max_calls": 2
+      }
+    ],
+    "bb144_p0.015_B4": [
+      {
+        "name": "original",
+        "kind": "original",
+        "family": "bphuf",
+        "persistent": true,
+        "policy": "repair2"
+      },
+      {
+        "name": "selected_combined",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "beam_climbing": true,
+        "det_beam": 10,
+        "kind": "tesseract",
+        "name": "baseline_tesseract",
+        "no_revisit_dets": true,
+        "pqlimit": 200000
+      }
+    ]
+  },
+  "memory_configs": {
+    "surface_d3_p0.003_B4": [
+      {
+        "name": "original",
+        "kind": "original",
+        "family": "bphuf",
+        "persistent": true,
+        "policy": "repair1"
+      },
+      {
+        "name": "selected_combined",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 2,
+        "selection": "cost",
+        "depth": 2,
+        "max_calls": 2
+      }
+    ],
+    "surface_d5_p0.006_B4": [
+      {
+        "name": "original",
+        "kind": "original",
+        "family": "bphuf",
+        "persistent": true,
+        "policy": "repair1"
+      },
+      {
+        "name": "selected_combined",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 30,
+        "candidate": true,
+        "K": 8,
+        "selection": "cost",
+        "adaptive": true,
+        "radius": 1,
+        "depth": 2,
+        "max_calls": 2
+      }
+    ],
+    "bb144_p0.015_B4": [
+      {
+        "name": "original",
+        "kind": "original",
+        "family": "bphuf",
+        "persistent": true,
+        "policy": "repair2"
+      },
+      {
+        "name": "selected_combined",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      }
+    ]
+  },
+  "selection": {
+    "surface_d3_p0.003_B4": {
+      "selected_source_role": "multi_candidate",
+      "selected_failures": 13,
+      "minimum_Seamwise_validation_failures": 13,
+      "selection_rule": "fastest within 10% of minimum observed Seamwise validation failure count; an operating-point rule, not an internal noninferiority confidence claim",
+      "n_validation": 512,
+      "selected_mean_ms": 1.258647125,
+      "reference": "baseline_tesseract",
+      "reference_validation_failures": 10,
+      "tesseract_validation_failures": 10,
+      "validation_point_target": false
+    },
+    "surface_d5_p0.006_B4": {
+      "selected_source_role": "best_combined",
+      "selected_failures": 43,
+      "minimum_Seamwise_validation_failures": 42,
+      "selection_rule": "fastest within 10% of minimum observed Seamwise validation failure count; an operating-point rule, not an internal noninferiority confidence claim",
+      "n_validation": 512,
+      "selected_mean_ms": 52.74447504882812,
+      "reference": "baseline_tesseract",
+      "reference_validation_failures": 15,
+      "tesseract_validation_failures": 15,
+      "validation_point_target": false
+    },
+    "bb144_p0.015_B4": {
+      "selected_source_role": "best_combined",
+      "selected_failures": 0,
+      "minimum_Seamwise_validation_failures": 0,
+      "selection_rule": "fastest within 10% of minimum observed Seamwise validation failure count; an operating-point rule, not an internal noninferiority confidence claim",
+      "n_validation": 512,
+      "selected_mean_ms": 3.7574390019531254,
+      "reference": "baseline_tesseract",
+      "reference_validation_failures": 0,
+      "tesseract_validation_failures": 0,
+      "validation_point_target": true
+    }
+  },
+  "planned_comparisons": 425,
+  "noninferiority_margin": 0.1,
+  "N_rule": "largest of 10000/8000/5000/2000 whose validation-only mean forecast plus fixed secondary/timing/memory reservations fits 85% of five-hour cap; never shortened after outcomes",
+  "forecast_s": 14417.294879052624,
+  "forecast_components": {
+    "primary_seconds_per_shot_across_matrix": 0.9087225007421875,
+    "secondary_s": 6248.692059078125,
+    "timing_s": 392.009755122,
+    "memory_s": 206.813058915,
+    "reserved_s": 7147.514873115124
+  },
+  "sources": {
+    "cpp/src/bindings.cpp": "190a55749d1427b48ce081cbc25ebed95727833d5659f4bb755276f988fff7a8",
+    "cpp/src/decoder.cpp": "0105f14e91d5f497d24463253374226ed97b4843d1ee2ce5e59731ac4899c915",
+    "cpp/include/seamwise/decoder.hpp": "3f69fb9c9f5acedb44f2f3de57069f9a35cefe0bca8707c46486e2eb7e4d41c2",
+    "cpp/include/seamwise/policy.hpp": "9c529056e0c44f3a1445ef0f9f0daa50fe97a08505c39ccde30f947923de3379",
+    "python/memory_audit.py": "e6c67af071b8c5842982365684ba4e912710d4b12eee6e0f8f8f3998c2598863",
+    "python/freeze_guard.py": "5bd840d4e7758db405dc527db172116d2b0427815f705e45fc4d39c4a5b8261a",
+    "python/gf2.py": "09143937a815e7fa26240a853c294dde76f6df5a20edce20d9c70725564a648e",
+    "python/common.py": "00e3001c3fcb031e98ac38bdbf21dfc9943723a5065e42987ca447b1f3431551",
+    "python/analysis.py": "cafd88abdcbfb09c2a6c8b77dc45b6ced1d3d2fb9e10cf26f110fafe489d3c8d",
+    "python/local_research.py": "905961458250232b66b18c586d38f7ca4dcc0d4b0c213cbc44a8952e122051c2",
+    "python/runner.py": "9ec6f621d74d52282558d88fcafb95297b9bc30ff03a7fe27157931f024a0187",
+    "python/oracle.py": "b2240d68ff8d827ae6693320cef347bee3f93320ff9deb870ca71e6e5c7dfa5c"
+  },
+  "runtime_provenance": {
+    "versions": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "stim": "1.16.0",
+      "ldpc": "2.4.1",
+      "relay-bp": "0.2.2",
+      "tesseract-decoder": "0.1.1",
+      "pybind11": "3.1.0"
+    },
+    "binary_sha256": {
+      ".venv/lib/python3.13/site-packages/ldpc/lsd_decoder/_lsd_decoder.cpython-313-x86_64-linux-gnu.so": "26f7acf04e82899c7339a048a3fe57cb588eec1822b0c760d29886699fad5b5b",
+      ".venv/lib/python3.13/site-packages/ldpc/bp_flip/_bp_flip.cpython-313-x86_64-linux-gnu.so": "0bf35f6289853cac7669de7cdcb2092c8fb571a5fbb320d19fcaf8178e95be63",
+      ".venv/lib/python3.13/site-packages/ldpc/belief_find_decoder/_belief_find_decoder.cpython-313-x86_64-linux-gnu.so": "531cf4a5ff0ba51be9ba48828f8e1912ebd0ae572991fa135dfda3cf3421bd2c",
+      ".venv/lib/python3.13/site-packages/ldpc/bplsd_decoder/_bplsd_decoder.cpython-313-x86_64-linux-gnu.so": "38d3a9c98e582efe9b81a37892584f99c1453dcf5ace50c35d3f82e40148d2e5",
+      ".venv/lib/python3.13/site-packages/ldpc/union_find_decoder/_union_find_decoder.cpython-313-x86_64-linux-gnu.so": "8ff0597a35012d26daa9ad961707b1793222c9273d590cf26cc30f1111c9a9d6",
+      ".venv/lib/python3.13/site-packages/ldpc/bposd_decoder/_bposd_decoder.cpython-313-x86_64-linux-gnu.so": "1a80697917186afd6544f6a0321ea5be221a436b0a591ad3725bb164fb86a785",
+      ".venv/lib/python3.13/site-packages/ldpc/bp_decoder/_bp_decoder.cpython-313-x86_64-linux-gnu.so": "5db280d3c175b170e910b106b75551d00fbe8a732140de4e5e337d00bb298057",
+      ".venv/lib/python3.13/site-packages/ldpc/mod2/_mod2.cpython-313-x86_64-linux-gnu.so": "28eb9e407827893793512238b60fda6bbffbc6ae5e8f554e0fd47bae01681148",
+      ".venv/lib/python3.13/site-packages/relay_bp/_relay_bp.cpython-313-x86_64-linux-gnu.so": "ebe9cd9fa38079c5383c932891348ca2c9e05361943db90b926bd8e504b29a3a",
+      ".venv/lib/python3.13/site-packages/tesseract_decoder.so": "c367c1206cdbc6304f029f008dcdc10230dc32392b8e9bde0e5831076f5555b7",
+      ".venv/lib/python3.13/site-packages/stim/_detect_machine_architecture.cpython-313-x86_64-linux-gnu.so": "33a5085a33d3a1b856f59cc2a951426396a32b8f001443ab5d0cd692576e6020",
+      ".venv/lib/python3.13/site-packages/stim/_stim_polyfill.cpython-313-x86_64-linux-gnu.so": "6108ade6892022543459bc2c9c8d0e97075170ad33d159146f6e15ed446cb601",
+      ".venv/lib/python3.13/site-packages/stim/_stim_sse2.cpython-313-x86_64-linux-gnu.so": "8d8ea411cf3d9dcd4c58e4d379bfcce8ff162d0a291fc779a8a0ecc2a90c279b",
+      "build/_gari.cpython-313-x86_64-linux-gnu.so": "937eed873eb7ceb785af95d3f2ca70bd94be207ea44d07ad8a8166396f0359da",
+      "build/_native.cpython-313-x86_64-linux-gnu.so": "6517fa2ecdc46494af4c1de6c6497e703cb26826b30d63485317917522146758",
+      "build/liballoc_audit.so": "e1215dfd4820b89dc036f6d40aa21a39d595cc2bc67a0860c2ade6c539eeddd5"
+    },
+    "commits": {
+      "gari": "6380d52e76d8c9cb0b4eedf3e8d2429b24cef78d",
+      "tesseract": "54569b4af741423708922a1c033feb483fc034c1",
+      "relay": "cdfdc996ce55582c4c431f8d8392bcce57175e36",
+      "ldpc": "d3429964cd4ffe1abfc041c6ec8b8425cb174f40"
+    }
+  },
+  "native_module_sha256": "ea670fa37d6ac6a003574d7684692cc47728b499fdfcff68f2b0d60b7c3172a5",
+  "new_dataset_manifest_sha256": "81422eaf3d04638283216eb42c6a74796d535161441fd9b32b2ec2f3dde40bda",
+  "pool_manifest_sha256": "95746ad031a4d99d5b79ff823ad8e84bf8b53d0ac8b9183cfc482e33ecc698f5",
+  "old_native_module_sha256": "6517fa2ecdc46494af4c1de6c6497e703cb26826b30d63485317917522146758",
+  "previous_test_status": "EXPLORATORY_ONLY",
+  "first_confirmatory_access": null
+}

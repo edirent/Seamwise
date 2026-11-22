@@ -1,0 +1,66 @@
+\section{Experimental design}
+\paragraph{Compact code blocks.}
+The main experiments use rotated $[[9,1,3]]$ and $[[25,1,5]]$ surface-code blocks and $[[72,12,6]]$ BB blocks. Four-block circuits monitor eight logical Bell outputs for the surface code and 96 for BB. An eight-block distance-five surface circuit monitors 16 outputs and exercises multiple repair seams. Every block begins in an ideal encoded Bell pair with noiseless references, followed by transversal CNOT matchings, noisy syndrome extraction, and ideal final closure~\cite{tour}. The decoder receives the complete syndrome record and partitions it by spatial fault ownership. Surface-code extraction uses explicit ancilla schedules with depolarizing gate noise, reset flips, and readout flips at probability $p$. The BB control uses data depolarization and readout-flip noise with ideal transversal CNOTs and ideal stabilizer-product measurements. Stim generates the exact undecomposed detector models~\cite{stim}. Appendix~\ref{app:protocol} gives all circuit configurations and implementation details.
+
+\paragraph{Matched engine and policy comparisons.}
+BF, BP+LSD0, BP+LSD2, and BP+OSD0 each run joint decoding, direct cutting, and radius-one repair on identical fault samples~\cite{bfdocs,lsddocs,osddocs}. They share 30 min-sum BP iterations, scaling 0.625, parallel message scheduling, and one native CPU thread. BF additionally tests halo, radius-two, and rank-screened variants. A radius-one band contains two owner blocks; every replacement conditions on its exterior and retains the complete touched-row detector constraints. In four-block circuits, radius two covers all nonzero detector columns; in eight-block circuits, its bands contain four owner blocks.
+
+\paragraph{Paired inference and execution measurements.}
+The complete original study contains 4,096 seeded circuit samples, 15 configurations, and 16 decoder stacks. The frozen protocol specifies nine contrasts per configuration. We use exact conditional McNemar tests~\cite{mcnemar} with Holm adjustment across all 135 contrasts~\cite{holm}. The plots show 95\% marginal Wilson intervals~\cite{wilson}. The full outcomes, effect intervals, seeds, and protocol history are retained in the original study. Engineering measurements use three fresh-process replicates on 64 common inputs, exclude startup from warm-call latency, and separately record startup and process-tree memory. Reused timing and functional-audit inputs do not increase the independent logical sample count.
+
+\paragraph{Controlled backend and external-baseline study.}
+The new study reuses stored circuits, detector matrices, and noise samples from the original repair-policy grid. It compares a rebuilding HUF reference with the persistent conditional backend inside the same ownership/cut/repair wrapper. Both use identical weighted boundary growth and terminal canonicalization. Tesseract~\cite{tesseract} and native BP+LSD2/OSD2 are evaluated on the same complete detector records. Appendix~\ref{app:study} specifies the pilot budgets, scaling circuits, timing scopes, and unavailable baselines.
+
+\section{Compact-code results}\label{sec:results}
+\subsection{Logical failure rates across inner decoders}
+The primary benchmark uses four $[[25,1,5]]$ blocks at $p=0.006$. Radius-one boundary repair reduces BF failures from 65 to 45 in 256 shared shots, a 30.8\% relative reduction. The paired outcomes contain 21 corrected failures and one new failure, giving a Holm-adjusted $p=0.00147$. BP+LSD2 improves from 58 to 38 failures, a 34.5\% reduction with adjusted $p=0.00477$. All four cut-to-repair contrasts in Table~\ref{tab:primary} are significant after Holm adjustment across the 135 planned comparisons.
+
+\begin{table*}[t]\centering\small
+\caption{Logical failures before and after radius-one repair on 256 paired shots for four $[[25,1,5]]$ blocks at $p=0.006$. Paired gain is the absolute decrease in failure rate in percentage points (pp), with a conservative 95\% interval.}\label{tab:primary}
+\begin{tabular}{lrrrrrr}\toprule
+Engine&Cut&Repair&Fixed&New&Paired gain, pp [95\% CI]&Holm $p$\\\midrule
+BF&65&45&21&1&7.8 [2.3, 12.9]&0.00147\\
+LSD0&65&43&24&2&8.6 [2.6, 14.2]&0.00142\\
+LSD2&58&38&22&2&7.8 [2.0, 13.3]&0.00477\\
+OSD0&62&43&21&2&7.4 [1.7, 12.8]&0.00872\\\bottomrule
+\end{tabular}\end{table*}
+In the $d=5$, $p=0.003$ case, BF failures decrease from 55 to 39 on 1,024 paired shots. Figure~\ref{fig:failures} shows the surface-code and BB72 operating points with Wilson intervals.
+
+\begin{figure*}[t]\centering\includegraphics[width=\textwidth]{figures/fig4.pdf}
+\caption{BF direct cutting and radius-one repair on paired samples. The $d=3$ surface-code and BB72 cases use 512 and 128 shots per point, respectively. The $d=5$ cases use 1,024 shots at $p=0.003$ and 256 at $p=0.006$. Error bars show marginal 95\% Wilson intervals.}\label{fig:failures}\end{figure*}
+
+\subsection{Extension to compact high-rate BB blocks}
+The $[[72,12,6]]$ BB case extends boundary repair to blocks that each encode 12 logical qubits. At $p=0.015$, BP+LSD2 reduces the observed count from 44 to 30 failures in 128 shots, a 31.8\% reduction; BF reduces 44 to 32, a 27.3\% reduction. Each shot simultaneously monitors both Pauli sectors through 96 Bell-reference observables. These results describe the tested phenomenological BB noise model.
+
+\subsection{Half-size bands with full logical reach}
+The rank identity explains why a narrow owner band can address a rich set of circuit-level logical alternatives. In the four-block distance-five model, a radius-one band contains 5,299 of the full problem's 10,164 fault variables and retains all eight dimensions of monitored logical freedom. In BB72 it contains exactly half the fault variables and retains all 96 logical-change dimensions. The compact $d=3$ band accesses seven of eight dimensions. Table~\ref{tab:reach} makes this local-to-global relationship explicit.
+\begin{table*}[t]\centering\small
+\caption{Logical reach of a radius-one band in four-block circuits.}\label{tab:reach}
+\begin{tabular}{lrrr}\toprule
+Code block&Fault variables (local / full)&Share (\%)&$\rho$ (local / full)\\\midrule
+Surface $[[9,1,3]]$&949 / 1,821&52.1&7 / 8\\
+Surface $[[25,1,5]]$&5,299 / 10,164&52.1&8 / 8\\
+BB $[[72,12,6]]$&3,456 / 6,912&50.0&96 / 96\\\bottomrule
+\end{tabular}\end{table*}
+Full logical reach in the distance-five and BB72 bands means that every monitored logical offset is attainable by a syndrome-consistent replacement with the exterior fixed. The inner decoder and acceptance rule determine which feasible replacements are made in practice. The nested-support measurements in Appendix~\ref{app:surface} resolve how that reach emerges as columns enter a band. Proposition~\ref{prop:exposed} additionally separates this full-band capacity from the support actually inserted by persistent HUF; the original rank table does not measure the latter.
+
+\subsection{Parallel repair on eight compact surface-code blocks}
+The eight-block $[[25,1,5]]$ circuit has three disjoint radius-one seam bands. Two worker processes execute those updates concurrently and return bitwise-identical corrections to the serial implementation. Mean warm-call latency decreases from 60.00 to 49.71 ms, corresponding to $1.21\times$ the serial-repair throughput. Direct cutting takes 35.44 ms. Parallel repair increases peak process-tree proportional set size (PSS) from 88.1 to 233.1 MiB relative to serial repair (Table~\ref{tab:parallel}). At distance three, parallel repair increases mean warm-call latency from 3.53 to 4.57 ms (Table~\ref{tab:engineering}). Warm-call timings pool three fresh-process replicates. PSS is sampled separately on the first eight inputs of each run. Appendix~\ref{app:engineering} gives the complete execution grid.
+
+All six radius-one process-parallel trials reproduce serial corrections bit for bit. An additional 32-input functional audit executes overlapping radius-two bands in two colors and matches the serial reference with the same color order. The implementation therefore realizes both the disjoint-update composition theorem and a concrete conflict schedule.
+\begin{table}[t]\centering\small
+\caption{Warm-call performance and logical failures on 64 shared shots for eight $[[25,1,5]]$ blocks at $p=0.003$.}\label{tab:parallel}
+\begin{tabular}{lrrrr}\toprule
+Method&Failures&Mean ms&p95 ms&PSS MiB\\\midrule
+Joint BF&9 / 64&68.78&149.46&74.6\\
+Cut BF&9 / 64&35.44&77.20&82.3\\
+Serial repair&3 / 64&60.00&137.54&88.1\\
+Parallel repair&3 / 64&49.71&122.24&233.1\\\bottomrule
+\end{tabular}\end{table}
+
+\input{study_results}
+
+\section{Conclusion}
+Seamwise combines fixed-exterior boundary repair, logical-reach analysis, merge-persistent conditional solving, and exact scheduling of disjoint updates. Accepted repairs preserve the full detector record and decrease the prior configuration cost. The persistent state eliminates repeated reconstruction of inherited detector relations, while the exposed-reach certificate characterizes the logical directions represented by the inserted fault support.
+
+The original compact-circuit policy study demonstrates 30.6--34.5\% fewer logical failures than direct cutting in its primary comparison. The new controlled study tests the implementation cost of the persistent backend and compares full-record native baselines on identical noise samples. Exact output preservation is an algorithmic guarantee under canonicalization; a practical speed advantage and competitive logical accuracy require measurement. These results characterize the measured Python reference and circuit sizes. Native optimized implementations, common-budget accuracy--latency frontiers, and complete 2026 comparator coverage remain to be evaluated.

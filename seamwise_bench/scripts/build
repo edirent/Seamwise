@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+build_dir=${SEAMWISE_BUILD_DIR:-build}
+cmake -S . -B "$build_dir" -DCMAKE_BUILD_TYPE=Release -DPython_EXECUTABLE="$PWD/.venv/bin/python" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON "$@"
+cmake --build "$build_dir" --parallel 1
+ctest --test-dir "$build_dir" --output-on-failure
+"${CC:-cc}" -O2 -Wall -Wextra -fPIC -shared scripts/alloc_audit.c -o "$build_dir/liballoc_audit.so"
+"${CC:-cc}" -O2 -fno-builtin -Wall -Wextra scripts/alloc_audit_contract.c -ldl -o "$build_dir/alloc_audit_contract"
+audit_library="$(cd "$build_dir" && pwd)/liballoc_audit.so"
+LD_PRELOAD="$audit_library" "$build_dir/alloc_audit_contract"

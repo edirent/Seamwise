@@ -1,0 +1,19 @@
+{
+  "python": "3.12.14",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.39",
+  "versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "stim": "1.16.0",
+    "ldpc": "2.4.1",
+    "tesseract-decoder": "0.1.1.dev20261102041404"
+  },
+  "sources": {
+    "huf.py": "3ad9717f31604c0b920bcc1a576a68cda0a0e2ff67d254d6b58722f45ce51b6d",
+    "run.py": "489c17aed93928cd968cf482e09b715ffcf0a636cc5a266ba55b9eef47930e9c",
+    "algebra.py": "5fdff1cbcfdf037c771fcc1f2d73848d0f058f6e0e6da2200022a04d0cc2efa8"
+  },
+  "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+  "logical_cpus": 9,
+  "affinity_cpu_count": 9
+}

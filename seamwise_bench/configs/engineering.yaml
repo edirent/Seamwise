@@ -1,0 +1,34 @@
+workloads:
+- surface_d3_p0.003_B4
+- surface_d5_p0.006_B4
+- bb144_p0.015_B4
+backends:
+- name: python_rebuild
+  kind: python
+  family: bphuf
+  policy: repair1
+  persistent: false
+- name: python_persistent
+  kind: python
+  family: bphuf
+  policy: repair1
+  persistent: true
+- name: native_rebuild
+  kind: native
+  family: bphuf
+  policy: repair1
+  persistent: false
+- name: native_persistent
+  kind: native
+  family: bphuf
+  policy: repair1
+  persistent: true
+count: 128
+repetitions: 3
+warmup: 16
+budgets:
+  preparation: 120
+  decode: 240
+  memory: 120
+claim_scope: exploratory engineering; 128 timing IDs and three processes below recommended
+  primary timing size

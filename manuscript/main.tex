@@ -1,0 +1,202 @@
+\documentclass[10pt,letterpaper,twocolumn]{article}
+\usepackage[margin=0.68in,columnsep=0.24in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{microtype,amsmath,amssymb,amsthm,mathtools}
+\usepackage{graphicx,booktabs,array,enumitem,xcolor,caption,url,balance}
+\usepackage[colorlinks=true,allcolors=blue!45!black]{hyperref}
+\captionsetup{font=footnotesize,labelfont=bf}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{1pt}
+\raggedbottom
+\setlist{nosep,leftmargin=*}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\F}{\mathbb F_2}
+\newcommand{\rank}{\operatorname{rank}_{\F}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\own}{\operatorname{own}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\cost}{\mathcal C}
+\newcommand{\reach}{\mathcal V}
+\newcommand{\xor}{\oplus}
+\newcommand{\AlgBox}[2]{\par\smallskip\noindent\fbox{\begin{minipage}{0.95\columnwidth}\small\textbf{#1}\par\smallskip #2\end{minipage}}\par\smallskip}
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\Alph{subsection}}
+\makeatletter
+\renewcommand{\p@subsection}{\thesection-}
+\makeatother
+\title{\vspace{-1.5em}Seamwise: Boundary Repair for Partitioned\\Decoding of Logical Quantum Circuits}
+\author{Songhao Zhang\textsuperscript{1}\qquad Tianjie Hu\textsuperscript{1}\\[3pt]\small\textsuperscript{1}Taiyi Quantum Science \& Technology Co., Ltd.}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+Transversal entangling gates spread physical faults across encoded blocks, creating detector evidence that a partitioned decoder can separate prematurely. Seamwise repairs these boundaries by reopening nearby fault variables, conditioning on the fixed exterior, and accepting only syndrome-preserving improvements in configuration likelihood. We connect the logical freedom of these repairs to their algebraic execution cost. A rank identity characterizes the logical changes available to each repair band, while Seamwise's merge-persistent hypergraph union--find oracle retains disjoint detector-supported bases across cluster merges and eliminates each newly internal fault column once during growth. For repair calls containing $W$ fault-column incidences in total and maximum Tanner-cluster size $K_*$, a support-local implementation has deterministic repair work $O(IW+WK_*^2+W\log(W+2))$ under bounded detector degree and the stated growth scheduler, where $I$ bounds the BP iterations. A dependent-column certificate distinguishes full-band logical freedom from the logical directions exposed by growth. Circuit experiments evaluate the outer repair policy and find 30.6--34.5\% fewer logical failures than direct cutting in the primary compact surface-code comparison. On 256 identical distance-five circuit samples, a BP-assisted reference implementation returns identical corrections with 29 logical failures while reducing mean full repair latency from 143.4 to 132.0 ms when its rebuilding oracle is replaced by the persistent oracle. Native Tesseract yields ten failures at 169.9 ms on the same samples, exposing an accuracy--latency trade-off. We additionally measure process memory and scale block count, code distance, and circuit depth. The framework explicitly couples repair locality, accessible logical transformations, and the algebraic work required to execute them.
+\end{abstract}
+
+\section{Introduction}
+Transversal entangling gates couple error correction across encoded blocks. A physical fault on one block can propagate through a gate and flip detectors on several blocks, as the path in Fig.~\ref{fig:overview}(a) illustrates. The resulting detector outcomes provide evidence about the same underlying fault. A joint decoder can use that evidence in a single circuit-wide inference problem~\cite{cain}. Partitioning makes each inference problem smaller, but a partition boundary can separate the detector evidence needed to distinguish two plausible fault configurations (Fig.~\ref{fig:overview}(b)).
+
+Our direct-cut baseline processes partitions in block order. After committing each local correction, it forwards that correction's detector effects to later partitions through a residual syndrome. Forwarding communicates the consequences of a choice, but the later partition cannot revise the fault variables that produced it. This distinction matters because two configurations can reproduce the same measured syndrome while implying different corrections to the logical outputs. A cut correction can therefore satisfy every detector and still make a logical error.
+
+We introduce Seamwise, a refinement procedure that starts from a syndrome-consistent correction. At each selected boundary, or seam, it reopens a band of fault variables assigned to blocks on either side and fixes the correction everywhere else. It removes the exterior contribution from every detector equation touched by the band, including equations whose detectors lie beyond the band. An inner decoder then proposes a local replacement. Seamwise accepts a proposal only if it satisfies all of those equations and increases the prior likelihood of the fault configuration. The incumbent remains a feasible solution throughout.
+
+The repair band controls which logical alternatives the decoder can reach. We derive a rank identity that counts the independent changes to monitored logical outputs attainable while preserving the syndrome and fixing the exterior. In the four-block distance-five surface-code and $[[72,12,6]]$ bivariate bicycle (BB) circuits, radius-one bands contain about half of the fault variables and span the full monitored logical-change space. The acceptance rule improves configuration likelihood. We measure logical accuracy separately because logical-class probabilities aggregate over multiple configurations. We also show that repairs on disjoint fault-variable sets commute even when their detector footprints overlap, allowing concurrent updates with the same correction as serial execution under the stated solver conditions.
+
+Repair locality alone does not control the cost of repeatedly solving the local systems. Seamwise therefore maintains a merge-persistent HUF state inside each conditional solve. Its state consists of a binary basis, a reduced target residual, and a correction witness. When Tanner components merge, their old bases occupy disjoint detector coordinates and concatenate without cross-elimination. Only newly internal fault columns require elimination. This provides a cluster-sensitive work bound for the repair stage without changing ownership, conditioning, or the likelihood acceptance rule. The bound applies to this explicit backend, not automatically to all four previously measured inner decoders.
+
+We evaluate the repair policy on matched fault samples across four inner-decoder settings. In the main benchmark, with four $[[25,1,5]]$ surface-code blocks and circuit noise probability $p=0.006$, radius-one repair yields 30.6--34.5\% fewer logical failures than direct cutting on 256 paired shots. All four comparisons are significant after Holm adjustment across the 135 planned tests. The BB experiments test the method on high-rate blocks under phenomenological noise. On eight distance-five surface-code blocks, parallel repair reduces mean warm-call latency from 60.00 to 49.71 ms relative to serial repair, while direct cutting takes 35.44 ms. The controlled backend study additionally measures rebuilding and persistent HUF on identical stored circuit samples, with native Tesseract and stronger-order BP postprocessing as external comparisons.
+
+The paper makes three contributions:
+\begin{enumerate}
+\item \textbf{A syndrome-preserving local repair decoder.} Ownership, residual forwarding, and conditioned seam replacement form a complete algorithm with proved consistency and strict likelihood descent.
+\item \textbf{A connection between logical reach and algebraic work.} The original rank identity characterizes a band's available logical transformations; the integrated persistent oracle supplies certified local corrections with a deterministic cluster-sensitive work bound. A dependent-column certificate identifies which logical directions the growth trajectory actually exposes.
+\item \textbf{Paired accuracy, execution, and scale measurements.} Circuit comparisons measure the repair policy, exact-oracle ablations isolate persistent computation, and native external baselines expose the remaining accuracy--latency gap.
+\end{enumerate}
+
+\begin{figure*}[t]
+\centering\includegraphics[width=\textwidth]{figures/fig1.pdf}
+\caption{Fault propagation and partition boundaries. (a) A physical fault can propagate across encoded blocks. (b) The dashed lines mark boundaries between schematic decoding subproblems. In the implementation, partitions are defined by fault ownership across encoded blocks. Seamwise reopens a band of fault variables at a boundary and retains every detector constraint that depends on the band.}\label{fig:overview}
+\end{figure*}
+
+\section{Related work}
+Correlated decoding uses fault propagation through transversal gates to improve logical-circuit inference~\cite{cain}. Cain et al. subsequently formulate efficient decoding in terms of propagating logical-operator products~\cite{fast}. Our method operates directly on a fixed detector model and repairs boundaries introduced by its spatial partition.
+
+Parallel window decoding establishes overlapping windows and correction reconciliation as scalable decoding tools~\cite{window}. Boundary repair complements pre-commit overlap with a post-cut operation: the existing correction supplies a feasible incumbent, and the exterior remains fixed while the seam is refined.
+
+BB codes provide high-rate compact quantum LDPC blocks~\cite{bb,bbpre}; the bicycle architecture develops transversal logical instructions and Bell-reference simulation methods~\cite{tour}. We combine those Bell-reference observables with explicit surface-code circuits and two-sector BB phenomenological circuits. We evaluate three postprocessors for belief propagation (BP). BeliefFind (BF) uses union-find inversion. The other two use localized statistics decoding (LSD)~\cite{lsd} and ordered statistics decoding (OSD)~\cite{osd}.
+
+Localized statistics decoding develops on-the-fly elimination and merge-aware local factorization~\cite{lsd}. Seamwise specializes its persistent state to HUF's full internal-hyperedge eligibility rule~\cite{cain} within fixed-exterior post-cut repair. Its analysis connects exact stopping and witness certificates with logical-change spaces and the work of a complete repair schedule.
+
+\section{Detector model and decoding objective}
+\subsection{Model and notation}
+Table~\ref{tab:notation} collects the notation. We use $[[n_q,k_q,d]]$ for a single code block and reserve $N_f,N_{\rm det},N_{\rm obs}$ for circuit fault mechanisms, detector bits, and monitored logical-output bits.
+
+Let $D\in\F^{N_{\rm det}\times N_f}$ be the detector matrix and $L\in\F^{N_{\rm obs}\times N_f}$ the logical-action matrix. Column $j$ represents a binary fault mechanism, with detector signature $D_{:,j}$ and logical signature $L_{:,j}$. For a sampled fault vector $e\in\F^{N_f}$,
+\begin{equation}s=De,\qquad \ell=Le.\label{eq:model}\end{equation}
+All matrix operations on syndromes and fault vectors are over $\F$. A decoder returns an estimate $\hat e$ satisfying $D\hat e=s$, or declares failure. A syndrome-consistent estimate succeeds logically precisely when
+\begin{equation}L(\hat e+e)=0.\label{eq:logical}\end{equation}
+The experimental failure statistic is the whole-circuit probability that any monitored logical output is incorrect.
+
+For independent fault probabilities $p_j\in(0,1)$, the configuration objective, up to an additive constant, is
+\begin{equation}\cost(x)=\sum_{j=1}^{N_f}w_jx_j,\qquad w_j=\log\frac{1-p_j}{p_j}.\label{eq:cost}\end{equation}
+The prior weights in Eq.~\eqref{eq:cost} are fixed throughout repair. BP posterior reliabilities may guide the inner search, but acceptance uses the original configuration objective. We evaluate logical performance using Eq.~\eqref{eq:logical} and accept repairs using the configuration objective. Appendix~\ref{app:examples} gives the corresponding logical-class formulation.
+
+\begin{table}[t]\centering\small
+\caption{Core notation for the detector model, repair, and persistent backend.}\label{tab:notation}
+\begin{tabular}{@{}p{0.24\columnwidth}p{0.69\columnwidth}@{}}\toprule
+Symbol&Meaning\\\midrule
+$D,L$&Maps from faults to detector bits and logical flips.\\
+$e,\hat e$&Sampled fault vector and decoded estimate.\\
+$s,\ell$&Measured syndrome $De$ and sampled logical flips $Le$.\\
+$x,z$&Current estimate and candidate seam replacement.\\
+$J,\bar J,R(J)$&Reopened columns, fixed exterior, and all touched detector rows.\\
+$D_J,t_J$&$D_{R(J),J}$ and its conditioned target.\\
+$w_j,\cost$&Prior fault weight and configuration cost.\\
+$\rho(J),\reach(J)$&Dimension and subspace of available logical changes.\\
+$S,\mathcal I(S)$&Tanner component and its eligible internal columns.\\
+$\mathcal B_S,r_S,u_S$&Persistent basis, target residual, correction witness.\\
+$m_a,K_a$&Fault count and maximum cluster size in repair call $a$.\\
+$W,K_*$&$\sum_a m_a$ and $\max_aK_a$.\\
+$F_a,\rho_{\rm act}$&Columns actually inserted and their exposed logical reach.\\\bottomrule
+\end{tabular}\end{table}
+
+\subsection{Constructing the matrices from a small circuit}
+Prepare three qubits $a,b,c$ in $|000\rangle$, apply CNOTs $a\to b$ and $a\to c$, and finally measure all three in $Z$ (Fig.~\ref{fig:small}). This is a repetition-code circuit restricted to $X$ faults. Write its measurement bits as $u_a,u_b,u_c$. The two detector bits are the stabilizer parities $s_1=u_a+u_b$ and $s_2=u_b+u_c$, corresponding to $Z_aZ_b$ and $Z_bZ_c$. The monitored logical observable is $\bar Z=Z_a$, so its flip bit is $\ell=u_a$. All three parities have known zero values in the ideal circuit.
+
+Each column is constructed by activating one fault and recording the resulting detector and logical flips. Figure~\ref{fig:small} gives the circuit and the four fault signatures. Stacking these signatures as columns gives
+\begin{equation}
+D=\begin{pmatrix}1&1&0&1\\0&1&1&1\end{pmatrix},\qquad L=\begin{pmatrix}1&0&0&1\end{pmatrix}.\label{eq:toy}
+\end{equation}
+Here $N_f=4$, $N_{\rm det}=2$, and $N_{\rm obs}=1$: a column counts a fault mechanism at a circuit location, rather than a physical qubit. For example, $e=(0,0,0,1)^T$ produces $s=(1,1)^T$ and $\ell=1$. The alternative $\hat e=(0,1,0,0)^T$ has the same syndrome but $L\hat e=0$. Thus matching detector bits alone does not determine the logical action. In the full experiments, the same column construction includes measurement faults and propagated multi-block faults, with final Bell products providing the monitored logical observables.
+
+\begin{figure*}[t]\centering\includegraphics[width=\textwidth]{figures/fig2.pdf}
+\caption{Constructing detector and logical-action columns. Each $Xe_j$ marks an optional fault in the circuit (left). Activating that fault alone gives row $j$ of the signature table (right). Fault 4 occurs before the second CNOT, which propagates its $X_a$ to $X_aX_c$.}\label{fig:small}\end{figure*}
+
+\section{Boundary-repair algorithm and guarantees}
+\subsection{Fault ownership and residual syndromes}
+Assign every detector row $i$ a block label $\beta(i)\in\{1,\ldots,B\}$. For each nonzero detector column, define its owner by
+\begin{equation}\own(j)=\min\{\beta(i):D_{ij}=1\}.\label{eq:owner}\end{equation}
+Ownership is determined by the propagated detector signature. It ensures that a fault owned by a later block has no detector effect in an earlier block:
+\begin{equation}\beta(i)<\own(j)\quad\Longrightarrow\quad D_{ij}=0.\label{eq:triangular}\end{equation}
+Syndrome-invisible columns are assigned their prior-minimizing values. Their sampled logical effects remain included in Eq.~\eqref{eq:logical}.
+
+Let $F$ be the set of already committed variables, with committed estimate $x_F$. The residual syndrome is
+\begin{equation}s^{\rm res}=s+D_{:,F}x_F.\label{eq:forward}\end{equation}
+Forwarding means applying Eq.~\eqref{eq:forward} to all affected rows, including rows in later blocks. Updating only the rows of the current core would lose precisely the inter-block information that correlated decoding is intended to retain.
+
+\subsection{Initial partition pass}
+The initial pass decodes two-owner-block cores in order, commits each core's variables, and forwards their complete detector signature into the residual syndrome. A halo of width $h$ adds uncommitted owner blocks as context. Core consistency is checked at every commitment; the same-engine joint solver supplies the fallback. Appendix~\ref{app:initial} gives the full algorithm and the core-closure proof.
+
+\subsection{Post-cut seam repair}
+Begin with a syndrome-consistent direct-cut estimate $x$. A seam at block boundary $b$ separates blocks $b-1$ and $b$. For radius $r$, unfreeze the owner band
+\begin{equation}J_{b,r}=\{j:b-r\le\own(j)<b+r\},\label{eq:band}\end{equation}
+with block labels clipped to the valid range. Define its complete touched-row set
+\begin{equation}R(J)=\{i:\exists j\in J,\ D_{ij}=1\}.\label{eq:rows}\end{equation}
+The exterior $x_{\bar J}$ is fixed, so the replacement target is
+\begin{equation}t_J=s_{R(J)}+D_{R(J),\bar J}x_{\bar J}.\label{eq:target}\end{equation}
+Subscripts select detector rows first and fault columns second: $D_{R(J),J}$ describes the unfrozen variables, while $D_{R(J),\bar J}x_{\bar J}$ is the known detector contribution of the exterior. Appendix~\ref{app:initial} gives a numerical example.
+
+Re-decode $D_{R(J),J}z=t_J$ and accept a candidate only when it is consistent and
+\begin{equation}\sum_{j\in J}w_jz_j<\sum_{j\in J}w_jx_j.\label{eq:accept}\end{equation}
+Each seam therefore defines a constrained refinement of the existing correction, rather than a new independent decoding problem.
+
+\AlgBox{Algorithm 1: likelihood-filtered seam repair}{
+\textbf{Input:} feasible $x$, ordered seams $\mathcal S$, radius $r$, priors, inner solver $\mathcal A$.
+\begin{enumerate}
+\item For the next seam, form $J$, $R(J)$, and $t_J$ from the current $x$.
+\item Compute $z\leftarrow\mathcal A(D_{R(J),J},t_J,p_J)$.
+\item If $D_{R(J),J}z=t_J$ and Eq.~\eqref{eq:accept} holds, set $x_J\leftarrow z$. Otherwise retain $x_J$.
+\end{enumerate}
+Repeat for each seam in order; return $x$.}
+
+\begin{theorem}[Feasible descent]\label{thm:descent}
+Every accepted replacement in Algorithm 1 preserves $Dx=s$ and strictly decreases $\cost(x)$. Any sequence of accepted replacements is finite, even if seams are revisited.
+\end{theorem}
+\begin{proof}
+On $R(J)$, Eq.~\eqref{eq:target} enforces the original syndrome after the exterior is restored. Outside $R(J)$, every column in $J$ is zero, so replacing $x_J$ changes no detector. The exterior contribution to Eq.~\eqref{eq:cost} is fixed, and Eq.~\eqref{eq:accept} therefore strictly decreases total cost. There are finitely many binary configurations; strict descent prevents a configuration from recurring.
+\end{proof}
+The incumbent restriction $x_J$ is a feasible solution of the conditioned problem. Retaining it when a candidate is rejected makes each band update a complete, consistency-preserving decoder operation. A radius-one band comprises two owner blocks. Its detector footprint can extend farther because a fault owned in the band may propagate into later blocks. This is why all touched rows, rather than only rows whose labels lie inside the band, are required in Eq.~\eqref{eq:rows}.
+
+\subsection{Which bands can change a logical decision?}
+For a band $J$, write $D_J=D_{R(J),J}$ and define
+\begin{equation}\rho(J)=\rank\begin{pmatrix}D_J\\L_{:,J}\end{pmatrix}-\rank(D_J).\label{eq:rank}\end{equation}
+\begin{theorem}[Logical freedom of a repair band]\label{thm:reach}
+Fix the exterior of a syndrome-consistent correction. The set of logical outputs attainable by feasible replacements on $J$ is an affine binary space of dimension $\rho(J)$. In particular, $\rho(J)=0$ if and only if every feasible replacement preserves the complete monitored logical output.
+\end{theorem}
+\begin{proof}
+Any two feasible replacements differ by $v\in\ker D_J$, and every such $v$ gives another feasible replacement. Their logical differences form $\reach(J)=L_{:,J}(\ker D_J)$. By rank--nullity its dimension is
+\begin{align*}
+\dim(\ker D_J)&-\dim(\ker D_J\cap\ker L_{:,J})\\
+&=\rank\begin{pmatrix}D_J\\L_{:,J}\end{pmatrix}-\rank(D_J).
+\end{align*}
+Translation by the incumbent logical output gives the claimed affine space.
+\end{proof}
+The identity turns repair width into a precise measure of logical reach. A zero-rank band preserves the monitored logical output; a rank-$\rho$ band admits $2^\rho$ feasible logical offsets relative to its incumbent. For nested bands $J\subseteq J'$, zero-extension embeds $\ker D_J$ into $\ker D_{J'}$, giving $\rho(J)\le\rho(J')$. Section~\ref{sec:results} measures this hierarchy in compact surface and BB blocks. Logical reach describes representability, not the success probability of a heuristic search or a minimum-likelihood guarantee.
+
+\subsection{Conflict graph and simultaneous repair}
+Let a complete feasible correction be $x$. A feasible update on a band $J$ has a difference vector $\delta_J$, supported on $J$, satisfying $D\delta_J=0$. Construct a conflict graph with one vertex per repair band and an edge exactly when two bands share a fault variable.
+\begin{theorem}[Commuting disjoint-band repair]\label{thm:commute}
+Suppose bands $J_1,\ldots,J_a$ are pairwise disjoint. Compute a candidate for each band from the same feasible incumbent $x$, using a solver whose candidate depends only on the fixed local matrix, target, and priors. The feasible, strictly improving replacements can be accepted simultaneously. Their combined correction equals the result of applying the same candidates in any serial order. Detector-row overlap does not require an additional conflict edge.
+\end{theorem}
+\begin{proof}
+Every accepted difference lies in $\ker D$, so their sum also lies in $\ker D$. For $J\cap K=\varnothing$, a feasible update $\delta_K$ changes the conditional target on $J$ by $D_{R(J),K}(\delta_K)_K=0$. It changes neither the incumbent variables on $J$ nor their cost. Thus the candidate, its feasibility test, and its acceptance decision are unchanged. Disjoint replacements consequently commute, and their strict cost decreases add.
+\end{proof}
+A proper coloring of the variable-conflict graph defines an execution schedule: process colors in order and the bands of each color concurrently. Updates in different colors may interact, so the color order is part of the algorithm. With core width two, radius-one seam bands are disjoint and form one color; the radius-two bands use two colors in the tested chains (Fig.~\ref{fig:bands}). The implementation validates bitwise equivalence to serial radius-one repair.
+
+For a single disjoint batch, a band with $\rho(J)=0$ can also be skipped without changing the batch's logical output: its update has zero logical action and leaves every other band's target and acceptance test unchanged. The rank-screened variant applies this rule to the disjoint, single-pass radius-one schedule.
+
+\input{persistent_main}
+
+\begin{figure*}[t]\centering\includegraphics[width=\textwidth]{figures/fig3.pdf}
+\caption{Variable supports for eight owner blocks and core width two. A halo adds context before committing the core. Radius-one repair uses three disjoint bands in one color; radius-two bands overlap and require two colors. Rectangles describe fault-owner support; the full touched-row detector footprint is defined by Eq.~\eqref{eq:rows}.}\label{fig:bands}\end{figure*}
+
+\input{evaluation}
+\input{original_appendices}
+\input{persistent_appendix}
+\input{references}
+\end{document}

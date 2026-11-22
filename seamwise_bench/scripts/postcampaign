@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 RAYON_NUM_THREADS=1
+export PYTHONPATH="$PWD/python" PYTHONDONTWRITEBYTECODE=1
+campaign_pid=${1:?Pass the running measurement supervisor PID}
+while kill -0 "$campaign_pid" 2>/dev/null; do sleep 5; done
+test -f evidence/final_memory.log
+.venv/bin/python scripts/terminal_policy_audit.py > evidence/terminal_policy_investigation.log 2>&1
+.venv/bin/python scripts/measure_scaling.py > evidence/scaling_measurement.log 2>&1
+cmake -S . -B build_gprof -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS='-g -pg' -DCMAKE_EXE_LINKER_FLAGS=-pg -DPython_EXECUTABLE="$PWD/.venv/bin/python" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON > evidence/gprof_v4_build.log 2>&1
+cmake --build build_gprof --target native_runner --parallel 1 >> evidence/gprof_v4_build.log 2>&1
+.venv/bin/python -m seamwise_bench.profiling results/20261109T191912Z-dataset-43f9bff8/manifest.json > evidence/profile_v4.log 2>&1
+.venv/bin/python - <<'PY'
+import json,pathlib
+from seamwise_bench.common import ROOT,atomic
+def last(label):
+    paths=sorted((ROOT/'results').glob('*-'+label+'-*'))
+    assert paths and (paths[-1]/'execution_ledger.json').exists(), label
+    return str(paths[-1].relative_to(ROOT))
+idx=dict(validation='results/20261109T192007Z-validation-a4186940',historical_regression='results/20261109T200508Z-historical-regression-7eddf9ad',engineering='results/20261110T014034Z-timing-0c981922',optimization='results/20261110T014600Z-timing-e5ff9cf6',method_ablation='results/20261110T014801Z-validation-25443a0e',rebuild_fairness='results/20261110T015014Z-timing-52a02c94',primary_timing='results/20261110T020445Z-timing-4dfa9030',accuracy=last('accuracy'),memory=last('memory'),scaling=json.loads((ROOT/'evidence/scaling_measurement_index.json').read_text())['run'],profiles=str(sorted((ROOT/'results').glob('*-profiles-*'))[-1].relative_to(ROOT)),quality_reference_labels={w:'tuned_tesseract' for w in ['bb144_p0.015_B4','surface_d3_p0.003_B4','surface_d5_p0.006_B4']})
+atomic(ROOT/'evidence/run_index.json',idx)
+PY
+.venv/bin/python scripts/prepare_remaining.py > evidence/remaining_plan.log 2>&1
+.venv/bin/python scripts/frontier_envelopes.py > evidence/frontier_envelopes.log 2>&1
+.venv/bin/python scripts/supplemental_analysis.py > evidence/supplemental_analysis.log 2>&1
+.venv/bin/python scripts/finalize_results.py > evidence/finalize_results.log 2>&1
+# Archive sealing follows a final human-readable report review by the agent.

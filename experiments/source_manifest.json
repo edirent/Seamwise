@@ -1,0 +1,15 @@
+{
+  "algebra.py": "5fdff1cbcfdf037c771fcc1f2d73848d0f058f6e0e6da2200022a04d0cc2efa8",
+  "bp_huf.py": "7d6d8645d30c39e3829b3c39c134fff7db6c563c6e1235b6ffca5e739894e6ba",
+  "extend_distance.py": "671718b15b6ced39b451ff5fb5e56bdd0052299c10f4cbe760d6a05177fc766b",
+  "finalize_report.py": "18d88e8ae8cdbc588f66e0125973e7a59d72395dfcc22341d4785cf953e410f7",
+  "huf.py": "3ad9717f31604c0b920bcc1a576a68cda0a0e2ff67d254d6b58722f45ce51b6d",
+  "profile_reference.py": "bdcfbde7fcb4eea030202710db7cd83e32019ab58c1f5c8b326bf7d5bbd36750",
+  "research/decoders.py": "98619f93afbb8a5cfd1677cee7f0d376b90080dc656685cb3d54406660b189a6",
+  "research/models.py": "c7e9569598c9c80f2ea0a0d479011ede838dcba9cc1d94adeca09b0e041a58ec",
+  "research/run_experiments.py": "6f3cb2b684ffa64ee41f3088256a7e3ceeec545157cb669563996c39a5fe6785",
+  "run.py": "489c17aed93928cd968cf482e09b715ffcf0a636cc5a266ba55b9eef47930e9c",
+  "run_bp_suite.py": "174d09a577d56dab82e7d421a0f430722cc4e829f9551c890bce2471330e0dfb",
+  "run_repeats.py": "f21b73d4f7a4cb58837a044ed1c275b46de6e854061b9678e0965a978c3ad932",
+  "summarize.py": "6e455bddc13582cfc001c02d3c42f875c3c3892b50fdd66e87f2b33b57a85cef"
+}

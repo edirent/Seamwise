@@ -1,0 +1,1010 @@
+[
+  {
+    "model": "bb144_p0.005_B4",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 0
+  },
+  {
+    "model": "bb144_p0.005_B4",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 0
+  },
+  {
+    "model": "bb144_p0.005_B4",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb144_p0.005_B4",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb144_p0.005_B4",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 0
+  },
+  {
+    "model": "bb144_p0.005_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 0
+  },
+  {
+    "model": "bb144_p0.005_B4",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 0
+  },
+  {
+    "model": "bb144_p0.015_B4",
+    "engine": "HUF",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 0
+  },
+  {
+    "model": "bb144_p0.015_B4",
+    "engine": "SW",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 0
+  },
+  {
+    "model": "bb144_p0.015_B4",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb144_p0.015_B4",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb144_p0.015_B4",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb144_p0.015_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb144_p0.015_B4",
+    "engine": "OSD2",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 34
+  },
+  {
+    "model": "bb72_p0.005_B4",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb72_p0.005_B4",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb72_p0.005_B4",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb72_p0.005_B4",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb72_p0.005_B4",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb72_p0.005_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 57
+  },
+  {
+    "model": "bb72_p0.005_B4",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb72_p0.015_B4",
+    "engine": "HUF",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 42
+  },
+  {
+    "model": "bb72_p0.015_B4",
+    "engine": "SW",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 42
+  },
+  {
+    "model": "bb72_p0.015_B4",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb72_p0.015_B4",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb72_p0.015_B4",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb72_p0.015_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "bb72_p0.015_B4",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d11_p0.003_B4_T3",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d11_p0.003_B4_T3",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d11_p0.003_B4_T3",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d11_p0.003_B4_T3",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d11_p0.003_B4_T3",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d11_p0.003_B4_T3",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d11_p0.003_B4_T3",
+    "engine": "OSD2",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 17
+  },
+  {
+    "model": "distance_surface_d5_p0.003_B4_T3",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d5_p0.003_B4_T3",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d5_p0.003_B4_T3",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d5_p0.003_B4_T3",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d5_p0.003_B4_T3",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 18
+  },
+  {
+    "model": "distance_surface_d5_p0.003_B4_T3",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d5_p0.003_B4_T3",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d7_p0.003_B4_T3",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d7_p0.003_B4_T3",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d7_p0.003_B4_T3",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d7_p0.003_B4_T3",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d7_p0.003_B4_T3",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d7_p0.003_B4_T3",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d7_p0.003_B4_T3",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d9_p0.003_B4_T3",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d9_p0.003_B4_T3",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d9_p0.003_B4_T3",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d9_p0.003_B4_T3",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d9_p0.003_B4_T3",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d9_p0.003_B4_T3",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "distance_surface_d9_p0.003_B4_T3",
+    "engine": "OSD2",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 47
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B16_T3",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B16_T3",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B16_T3",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B16_T3",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B16_T3",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B16_T3",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B16_T3",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B32_T3",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B32_T3",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B32_T3",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B32_T3",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B32_T3",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B32_T3",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B32_T3",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B4_T12",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B4_T12",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 45
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B4_T12",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B4_T12",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B4_T12",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B4_T12",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d3_p0.003_B4_T12",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d5_p0.003_B8_T10",
+    "engine": "HUF",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 42
+  },
+  {
+    "model": "scale_surface_d5_p0.003_B8_T10",
+    "engine": "SW",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 44
+  },
+  {
+    "model": "scale_surface_d5_p0.003_B8_T10",
+    "engine": "BPHUF",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d5_p0.003_B8_T10",
+    "engine": "BPSW",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d5_p0.003_B8_T10",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d5_p0.003_B8_T10",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d5_p0.003_B8_T10",
+    "engine": "OSD2",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 13
+  },
+  {
+    "model": "scale_surface_d7_p0.003_B4_T14",
+    "engine": "HUF",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 17
+  },
+  {
+    "model": "scale_surface_d7_p0.003_B4_T14",
+    "engine": "SW",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 17
+  },
+  {
+    "model": "scale_surface_d7_p0.003_B4_T14",
+    "engine": "BPHUF",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 17
+  },
+  {
+    "model": "scale_surface_d7_p0.003_B4_T14",
+    "engine": "BPSW",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 17
+  },
+  {
+    "model": "scale_surface_d7_p0.003_B4_T14",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d7_p0.003_B4_T14",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "scale_surface_d7_p0.003_B4_T14",
+    "engine": "OSD2",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 4
+  },
+  {
+    "model": "surface_d3_p0.001_B4",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.001_B4",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.001_B4",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.001_B4",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.001_B4",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.001_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.001_B4",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B4",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B4",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B4",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B4",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B4",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B4",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B8",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B8",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B8",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B8",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B8",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B8",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.003_B8",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.006_B4",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.006_B4",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.006_B4",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.006_B4",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.006_B4",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.006_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d3_p0.006_B4",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.001_B4",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.001_B4",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.001_B4",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.001_B4",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 59
+  },
+  {
+    "model": "surface_d5_p0.001_B4",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.001_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.001_B4",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B4",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B4",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B4",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B4",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B4",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B4",
+    "engine": "OSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B8",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B8",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B8",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B8",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B8",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B8",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d5_p0.003_B8",
+    "engine": "OSD2",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 60
+  },
+  {
+    "model": "surface_d5_p0.006_B4",
+    "engine": "HUF",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 165
+  },
+  {
+    "model": "surface_d5_p0.006_B4",
+    "engine": "SW",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 169
+  },
+  {
+    "model": "surface_d5_p0.006_B4",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 256
+  },
+  {
+    "model": "surface_d5_p0.006_B4",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 256
+  },
+  {
+    "model": "surface_d5_p0.006_B4",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 256
+  },
+  {
+    "model": "surface_d5_p0.006_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 256
+  },
+  {
+    "model": "surface_d5_p0.006_B4",
+    "engine": "OSD2",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 245
+  },
+  {
+    "model": "surface_d7_p0.001_B4",
+    "engine": "HUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d7_p0.001_B4",
+    "engine": "SW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d7_p0.001_B4",
+    "engine": "BPHUF",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d7_p0.001_B4",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d7_p0.001_B4",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d7_p0.001_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d7_p0.001_B4",
+    "engine": "OSD2",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 44
+  },
+  {
+    "model": "surface_d7_p0.003_B4",
+    "engine": "HUF",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 51
+  },
+  {
+    "model": "surface_d7_p0.003_B4",
+    "engine": "SW",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 58
+  },
+  {
+    "model": "surface_d7_p0.003_B4",
+    "engine": "BPHUF",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d7_p0.003_B4",
+    "engine": "BPSW",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d7_p0.003_B4",
+    "engine": "Tesseract",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d7_p0.003_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d7_p0.003_B4",
+    "engine": "OSD2",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 27
+  },
+  {
+    "model": "surface_d7_p0.006_B4",
+    "engine": "HUF",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 0
+  },
+  {
+    "model": "surface_d7_p0.006_B4",
+    "engine": "SW",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 0
+  },
+  {
+    "model": "surface_d7_p0.006_B4",
+    "engine": "BPHUF",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 4
+  },
+  {
+    "model": "surface_d7_p0.006_B4",
+    "engine": "BPSW",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 15
+  },
+  {
+    "model": "surface_d7_p0.006_B4",
+    "engine": "Tesseract",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 26
+  },
+  {
+    "model": "surface_d7_p0.006_B4",
+    "engine": "LSD2",
+    "status": "COMPLETE",
+    "partial_journal_shots": 64
+  },
+  {
+    "model": "surface_d7_p0.006_B4",
+    "engine": "OSD2",
+    "status": "NOT_COMPLETED_OR_UNAVAILABLE",
+    "partial_journal_shots": 24
+  }
+]

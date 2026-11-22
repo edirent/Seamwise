@@ -1,0 +1,84 @@
+workloads:
+- surface_d3_p0.003_B4
+- surface_d5_p0.006_B4
+- bb144_p0.015_B4
+backends:
+- name: huf_joint
+  kind: native
+  family: huf
+  policy: joint
+  persistent: true
+  order: 0
+- name: huf_cut
+  kind: native
+  family: huf
+  policy: cut
+  persistent: true
+  order: 0
+- name: huf_halo1
+  kind: native
+  family: huf
+  policy: halo1
+  persistent: true
+  order: 0
+- name: huf_repair1
+  kind: native
+  family: huf
+  policy: repair1
+  persistent: true
+  order: 0
+- name: bphuf_joint
+  kind: native
+  family: bphuf
+  policy: joint
+  persistent: true
+  order: 0
+- name: bphuf_cut
+  kind: native
+  family: bphuf
+  policy: cut
+  persistent: true
+  order: 0
+- name: bphuf_halo1
+  kind: native
+  family: bphuf
+  policy: halo1
+  persistent: true
+  order: 0
+- name: bphuf_repair1
+  kind: native
+  family: bphuf
+  policy: repair1
+  persistent: true
+  order: 0
+- name: lsd_joint
+  kind: native
+  family: lsd
+  policy: joint
+  persistent: true
+  order: 2
+- name: lsd_cut
+  kind: native
+  family: lsd
+  policy: cut
+  persistent: true
+  order: 2
+- name: lsd_halo1
+  kind: native
+  family: lsd
+  policy: halo1
+  persistent: true
+  order: 2
+- name: lsd_repair1
+  kind: native
+  family: lsd
+  policy: repair1
+  persistent: true
+  order: 2
+count: 64
+repetitions: 1
+warmup: 16
+budgets:
+  preparation: 120
+  decode: 120
+  memory: 60

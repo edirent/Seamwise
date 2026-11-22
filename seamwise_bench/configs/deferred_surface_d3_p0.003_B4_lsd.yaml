@@ -1,0 +1,129 @@
+workloads:
+- surface_d3_p0.003_B4
+count: 10000
+repetitions: 7
+warmup: 16
+budgets:
+  preparation: 120
+  decode: 14400
+  memory: 1800
+stage_wall_budgets:
+  timing: 14400
+  accuracy: 14400
+  memory: 3600
+campaign_wall_budget_s: 36000
+selection_record: evidence/selection_record.json
+backends:
+- iterations: 60
+  kind: lsd
+  name: tuned_lsd
+  order: 2
+  schedule: serial
+workload_backend_overrides:
+  bb144_p0.015_B4:
+    seamwise_selected:
+      family: bphuf
+      iterations: 30
+      kind: native
+      name: seamwise_selected
+      order: 0
+      persistent: true
+      policy: repair2
+    tuned_tesseract:
+      beam_climbing: true
+      det_beam: 10
+      kind: tesseract
+      name: tuned_tesseract
+      no_revisit_dets: true
+      pqlimit: 200000
+    tuned_lsd:
+      iterations: 60
+      kind: lsd
+      name: tuned_lsd
+      order: 2
+      schedule: parallel
+    tuned_osd:
+      iterations: 30
+      kind: osd
+      name: tuned_osd
+      order: 0
+      schedule: parallel
+  surface_d3_p0.003_B4:
+    seamwise_selected:
+      family: bphuf
+      iterations: 30
+      kind: native
+      name: seamwise_selected
+      order: 0
+      persistent: true
+      policy: repair1
+    tuned_tesseract:
+      beam_climbing: true
+      det_beam: 10
+      kind: tesseract
+      name: tuned_tesseract
+      no_revisit_dets: true
+      pqlimit: 200000
+    tuned_lsd:
+      iterations: 60
+      kind: lsd
+      name: tuned_lsd
+      order: 2
+      schedule: serial
+    tuned_osd:
+      iterations: 30
+      kind: osd
+      name: tuned_osd
+      order: 2
+      schedule: parallel
+    tuned_relay:
+      kind: relay
+      name: tuned_relay
+      num_sets: 10
+      pre_iter: 30
+      precision: F64
+      seed: 20261109
+      set_max_iter: 30
+      stop_nconv: 1
+    tuned_gari:
+      ensemble: 1
+      iterations: 400
+      kind: gari
+      name: tuned_gari
+      scale: 0.96875
+      schedule: 1
+      seed: 1
+      stopping: two_sector
+  surface_d5_p0.006_B4:
+    seamwise_selected:
+      family: bphuf
+      iterations: 30
+      kind: native
+      name: seamwise_selected
+      order: 0
+      persistent: true
+      policy: repair1
+    tuned_tesseract:
+      beam_climbing: true
+      det_beam: 20
+      kind: tesseract
+      name: tuned_tesseract
+      no_revisit_dets: true
+      pqlimit: 1000000
+    tuned_lsd:
+      iterations: 60
+      kind: lsd
+      name: tuned_lsd
+      order: 2
+      schedule: serial
+    tuned_osd:
+      iterations: 60
+      kind: osd
+      name: tuned_osd
+      order: 2
+      schedule: serial
+deferred_jobs: {}
+quality_reference_labels: {}
+continuation_scope: Previously deferred operating point selected from validation before
+  the first final test; no retuning. Extra campaign beyond original completed budget.
+  Same IDs add no independent samples.

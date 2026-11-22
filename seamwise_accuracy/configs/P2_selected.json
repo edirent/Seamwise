@@ -1,0 +1,69 @@
+{
+  "surface_d3_p0.003_B4": {
+    "best": {
+      "name": "bp_serial",
+      "kind": "new",
+      "policy": "repair1",
+      "scale": 0.625,
+      "iterations": 60,
+      "damping": 0,
+      "schedule": "serial"
+    },
+    "best_fast": {
+      "name": "bp_damp08",
+      "kind": "new",
+      "policy": "repair1",
+      "scale": 0.8,
+      "iterations": 60,
+      "damping": 0.25,
+      "schedule": "parallel"
+    },
+    "selection": "validation only; minimum logical count then mean latency, plus a <=max(2x original mean,1ms) fast candidate",
+    "best_failures": 1,
+    "best_fast_failures": 3
+  },
+  "surface_d5_p0.006_B4": {
+    "best": {
+      "name": "bp_serial",
+      "kind": "new",
+      "policy": "repair1",
+      "scale": 0.625,
+      "iterations": 60,
+      "damping": 0,
+      "schedule": "serial"
+    },
+    "best_fast": {
+      "name": "bp_norm08_30",
+      "kind": "new",
+      "policy": "repair1",
+      "scale": 0.8,
+      "iterations": 30
+    },
+    "selection": "validation only; minimum logical count then mean latency, plus a <=max(2x original mean,1ms) fast candidate",
+    "best_failures": 14,
+    "best_fast_failures": 18
+  },
+  "bb144_p0.015_B4": {
+    "best": {
+      "name": "bp_damp08",
+      "kind": "new",
+      "policy": "repair2",
+      "scale": 0.8,
+      "iterations": 60,
+      "damping": 0.25,
+      "schedule": "parallel"
+    },
+    "best_fast": {
+      "name": "bp_damp08",
+      "kind": "new",
+      "policy": "repair2",
+      "scale": 0.8,
+      "iterations": 60,
+      "damping": 0.25,
+      "schedule": "parallel"
+    },
+    "selection": "validation only; minimum logical count then mean latency, plus a <=max(2x original mean,1ms) fast candidate",
+    "best_failures": 0,
+    "best_fast_failures": 0
+  }
+}

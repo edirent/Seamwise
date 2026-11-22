@@ -1,0 +1,42 @@
+workloads:
+- surface_d3_p0.003_B4
+- surface_d5_p0.006_B4
+- bb144_p0.015_B4
+backends:
+- name: native_rebuild
+  kind: native
+  family: bphuf
+  persistent: false
+  policy: repair1
+- name: native_persistent
+  kind: native
+  family: bphuf
+  persistent: true
+  policy: repair1
+- name: tesseract_anchor
+  kind: tesseract
+  det_beam: 5
+  pqlimit: 200000
+- name: lsd2
+  kind: lsd
+  iterations: 30
+  order: 2
+- name: osd2
+  kind: osd
+  iterations: 30
+  order: 2
+- name: relay_strong
+  kind: relay
+  precision: F64
+  seed: 20261109
+  pre_iter: 80
+  num_sets: 100
+  set_max_iter: 60
+  stop_nconv: 5
+count: 4
+repetitions: 1
+warmup: 4
+budgets:
+  preparation: 120
+  decode: 120
+  memory: 60

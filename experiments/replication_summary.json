@@ -1,0 +1,96 @@
+{
+  "rows": [
+    {
+      "model": "bb144_p0.015_B4",
+      "engine": "BPHUF",
+      "replicate_means_ms": [
+        347.534308578125,
+        347.5276505,
+        348.36728374999996
+      ],
+      "median_mean_ms": 347.534308578125,
+      "pooled_p95_ms": 601.8541355,
+      "max_sampled_rss_mib": 137.71875
+    },
+    {
+      "model": "bb144_p0.015_B4",
+      "engine": "BPSW",
+      "replicate_means_ms": [
+        285.44741740625,
+        288.638393203125,
+        283.37330690625004
+      ],
+      "median_mean_ms": 285.44741740625,
+      "pooled_p95_ms": 454.8974363,
+      "max_sampled_rss_mib": 137.66015625
+    },
+    {
+      "model": "bb144_p0.015_B4",
+      "engine": "Tesseract",
+      "replicate_means_ms": [
+        55.979697890625005,
+        55.412655453125,
+        59.459172374999994
+      ],
+      "median_mean_ms": 55.979697890625005,
+      "pooled_p95_ms": 69.0524698,
+      "max_sampled_rss_mib": 117.1015625
+    },
+    {
+      "model": "surface_d5_p0.006_B4",
+      "engine": "BPHUF",
+      "replicate_means_ms": [
+        132.924232796875,
+        130.669294296875,
+        133.220966015625
+      ],
+      "median_mean_ms": 132.924232796875,
+      "pooled_p95_ms": 343.95363514999997,
+      "max_sampled_rss_mib": 112.41796875
+    },
+    {
+      "model": "surface_d5_p0.006_B4",
+      "engine": "BPSW",
+      "replicate_means_ms": [
+        122.25580948437499,
+        118.998578234375,
+        123.6052979375
+      ],
+      "median_mean_ms": 122.25580948437499,
+      "pooled_p95_ms": 328.14043654999983,
+      "max_sampled_rss_mib": 111.84375
+    },
+    {
+      "model": "surface_d5_p0.006_B4",
+      "engine": "Tesseract",
+      "replicate_means_ms": [
+        117.65637353124998,
+        113.70939771875,
+        115.0025771875
+      ],
+      "median_mean_ms": 115.0025771875,
+      "pooled_p95_ms": 246.90099424999997,
+      "max_sampled_rss_mib": 106.8046875
+    }
+  ],
+  "gains": [
+    {
+      "model": "bb144_p0.015_B4",
+      "paired_relative_reductions": [
+        0.17864967469224113,
+        0.16945200536460614,
+        0.18656739560650526
+      ],
+      "median_relative_reduction": 0.17864967469224113
+    },
+    {
+      "model": "surface_d5_p0.006_B4",
+      "paired_relative_reductions": [
+        0.08025943116634504,
+        0.08931490848940093,
+        0.07217833923376016
+      ],
+      "median_relative_reduction": 0.08025943116634504
+    }
+  ]
+}

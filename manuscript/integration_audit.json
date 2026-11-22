@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "violations": 0,
+  "seed": 20261109,
+  "scope": "finite algebra audit; no quantum-circuit accuracy or latency experiment",
+  "implementation": "Python global-index integer bitsets; not the theorem cost model",
+  "script_sha256": "5fdff1cbcfdf037c771fcc1f2d73848d0f058f6e0e6da2200022a04d0cc2efa8",
+  "counts": {
+    "oracle_comparisons": 19721,
+    "valid_witness_checks": 14068,
+    "kernel_and_logical_rank_checks": 19721,
+    "exhaustive_merge_traces": 2592,
+    "seeded_random_merge_traces": 800,
+    "conditioned_replacement_checks": 368,
+    "conditioned_band_rank_checks": 240,
+    "disjoint_composition_checks": 1024,
+    "toy_exposed_rank_transition": [
+      0,
+      1
+    ]
+  }
+}

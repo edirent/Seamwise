@@ -1,0 +1,28 @@
+\subsection{Controlled persistent-backend circuit pilot}\label{sec:newpilot}
+Across 24 circuit configurations and 168 planned configuration/backend jobs, 136 jobs complete the full measurement protocol. The 37 matched rebuilding/persistent comparisons cover 2,560 paired shot executions, with zero correction-vector or recorded growth-history disagreements. Full details and non-completions are retained in the archive.
+\begin{table*}[t]\centering\scriptsize
+\caption{Completed controlled pilot runs. HUF/SW: complete Seamwise with prior-weighted rebuilding/persistent HUF. BPHUF/BPSW: matched BP-assisted counterparts. Tesseract, LSD2 and OSD2: native joint decoders. RSS is the separately sampled whole-process footprint, not backend-only storage.}\label{tab:newpilot}
+\begin{tabular}{llrrrr}\toprule Configuration&Backend&Failures/shots&Mean ms&p95 ms&RSS MiB\\\midrule
+bb144\_p0.005\_B4&BPHUF&0/64&134.74&209.08&136.4\\
+bb144\_p0.005\_B4&BPSW&0/64&132.83&204.10&137.1\\
+bb144\_p0.005\_B4&HUF&2/64&224.01&376.17&126.5\\
+bb144\_p0.005\_B4&LSD2&0/64&13.46&21.00&74.7\\
+bb144\_p0.005\_B4&OSD2&0/64&959.25&1151.50&175.5\\
+bb144\_p0.005\_B4&SW&2/64&225.91&374.91&126.5\\
+bb144\_p0.005\_B4&Tesseract&0/64&14.75&19.29&117.4\\
+surface\_d3\_p0.003\_B4&BPHUF&2/64&1.99&6.91&75.6\\
+surface\_d3\_p0.003\_B4&BPSW&2/64&2.05&6.99&75.4\\
+surface\_d3\_p0.003\_B4&HUF&20/64&6.22&17.67&74.0\\
+surface\_d3\_p0.003\_B4&LSD2&2/64&0.39&1.29&69.0\\
+surface\_d3\_p0.003\_B4&OSD2&3/64&1.55&7.24&72.6\\
+surface\_d3\_p0.003\_B4&SW&20/64&6.68&18.91&73.7\\
+surface\_d3\_p0.003\_B4&Tesseract&2/64&2.15&8.39&97.1\\
+surface\_d5\_p0.006\_B4&BPHUF&29/256&143.39&369.52&113.1\\
+surface\_d5\_p0.006\_B4&BPSW&29/256&132.00&329.58&113.0\\
+surface\_d5\_p0.006\_B4&LSD2&47/256&15.05&47.81&73.2\\
+surface\_d5\_p0.006\_B4&Tesseract&10/256&169.88&432.11&113.7\\
+\bottomrule\end{tabular}\end{table*}
+\begin{figure*}[t]\centering\includegraphics[width=\textwidth]{study_scaling.pdf}\caption{Measured scaling pilot at fixed noise p=.003. Block sweep fixes d=3 and T=3; distance sweep fixes four blocks and T=3; depth sweep fixes d=3 and four blocks. Error bars are marginal Wilson intervals. Only completed, fixed-sample runs are plotted; fixed shallow extraction depth is not a threshold experiment.}\label{fig:newscale}\end{figure*}
+\begin{figure*}[t]\centering\includegraphics[width=\textwidth]{study_clusters.pdf}\caption{Peak-cluster distributions over recorded completed solver calls. Each panel uses configurations completed by both members of that oracle pair. BP early exits have zero peak; infeasible rejected-call histories are unavailable. The two panels need not have the same configuration cohort.}\label{fig:newclusters}\end{figure*}
+The controlled study does not establish a general latency advantage of the current persistent implementation. The exact-oracle guarantee concerns reusable algebra; full-call time additionally includes boundary scans, state creation, canonicalization and wrapper costs. Native external baselines test the remaining implementation and accuracy gap. Small pilot sample sizes, censored non-completions, and untuned resource settings limit interpretation to the measured implementation and workloads.
+\input{study_repeats}

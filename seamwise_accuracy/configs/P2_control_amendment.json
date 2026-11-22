@@ -1,0 +1,54 @@
+{
+  "reason": "Isolate iteration from normalization and bit-serial scheduling, which were coupled in the initial fixed presets. Validation-only extension before confirmatory labels are opened.",
+  "count": 128,
+  "configs": {
+    "surface_d3_p0.003_B4": [
+      {
+        "name": "bp_iter60",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.625,
+        "iterations": 60
+      },
+      {
+        "name": "bp_norm08_30",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 30
+      }
+    ],
+    "surface_d5_p0.006_B4": [
+      {
+        "name": "bp_iter60",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.625,
+        "iterations": 60
+      },
+      {
+        "name": "bp_norm08_30",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 30
+      }
+    ],
+    "bb144_p0.015_B4": [
+      {
+        "name": "bp_iter60",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.625,
+        "iterations": 60
+      },
+      {
+        "name": "bp_norm08_30",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 30
+      }
+    ]
+  }
+}

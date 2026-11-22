@@ -1,0 +1,17 @@
+{
+  "scope": "Conservative reporting supplement; does not amend decoder/data lock or sample counts",
+  "planned_unordered_configuration_pairs": 425,
+  "familywise_alpha": 0.05,
+  "endpoint_families": [
+    "paired risk difference interval",
+    "relative noninferiority contrast bounds"
+  ],
+  "per_pair_endpoint_alpha": "0.05/(2*425)",
+  "primary_orientation": "selected_combined versus each frozen comparator; selected role is first for all its unordered comparisons",
+  "relative_noninferiority_margin": 0.1,
+  "marginal_intervals": "Wilson95 and zero-event CP upper95 are descriptive marginal intervals",
+  "missing": "retain fixed multiplicity and missing counts; never compare a favorable completed prefix",
+  "component_pairing": "predeclared shot indices 0..1999 shared with primary records, never first 2000 in latency order",
+  "new_policy_selection_from_confirmatory": false,
+  "noninferiority_per_bound_alpha": "0.05/(2*425*2); six cell tails jointly cover both contrast bounds"
+}

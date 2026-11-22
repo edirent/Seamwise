@@ -1,0 +1,14 @@
+[
+  {
+    "mode": "rebuild",
+    "model": "bb144_p0.015_B4",
+    "shots": 8,
+    "basis_insertion_calls": 81639
+  },
+  {
+    "mode": "persistent",
+    "model": "bb144_p0.015_B4",
+    "shots": 8,
+    "basis_insertion_calls": 3100
+  }
+]

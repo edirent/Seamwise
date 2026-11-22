@@ -1,0 +1,61 @@
+\subsection{Merge-persistent conditional decoding}\label{sec:meld}
+The outer repair policy is unchanged. For a selected band, put $A=D_J$, $t=t_J$, and $m=|J|$, omitting the already fixed syndrome-invisible columns. Because $Dx=s$,
+\begin{equation}t_J=D_Jx_J.\label{eq:incumbenttarget}\end{equation}
+Thus a repair target is feasible by construction. This identity also permits target construction by multiplying the incumbent's local columns, without scanning a potentially large exterior. It does not make every intermediate HUF cluster feasible.
+
+In the Tanner graph of $A$, retain all touched detector rows and only the unfrozen fault columns. For a component $S$, let $C(S)$ be its check vertices and
+\begin{equation}\mathcal I(S)=\{j:f_j\in S,\ \supp(A_{:,j})\subseteq C(S)\}.\label{eq:internal}\end{equation}
+A column is legal only after its entire detector neighborhood is internal. Restricting an exterior-touching column to the current component would change the problem.
+
+For each component, maintain pivot pairs $(b_p,c_p)$ with $Ac_p=b_p$, a residual $r_S$, and a witness $u_S$ such that
+\begin{equation}
+\begin{split}
+t_S&=r_S+Au_S,\quad r_S[p]=0\ \text{at every stored pivot},\\
+\Span\{b_p\}&=\im A_{:,\mathcal I(S)}.
+\end{split}\label{eq:invariant}
+\end{equation}
+The symbols $r_S$ and $\rho(J)$ denote different quantities: the first is a syndrome vector, the second a logical-space dimension. Separate Tanner components have disjoint check coordinates. Their old bases therefore concatenate without cross-elimination; residuals and witnesses add. Each newly internal column is reduced once against the inherited basis, with coefficient vectors updated alongside it. The cluster is valid exactly when $r_S=0$. Appendix~\ref{app:persistent} gives the update algorithm and proof.
+
+\begin{theorem}[Exact conditional oracle]\label{thm:oracle}
+On a fixed local matrix, target, and merge-only HUF trajectory, the persistent oracle returns exactly the validity decisions of rebuilding every internal-column system. A valid witness obeys $Au_S=t_S$ and uses only internal columns. With identical growth weights, selection policy, and tie breaking, it induces the same growth trajectory as the rebuilding oracle.
+\end{theorem}
+Theorem~\ref{thm:oracle} preserves feasibility decisions. Distinct satisfying witnesses may have distinct logical actions and costs. When identical decoder outputs are required, one terminal canonical solve per final cluster reproduces the rebuilding implementation's fixed deterministic column-order/pivot rule within the bound below. Algorithm 1 still checks both the complete local syndrome and the original prior cost. A valid HUF witness is a proposal, not a minimum-cost solution.
+
+\begin{corollary}[End-to-end correction preservation]\label{cor:outerequivalence}
+Fix the model, priors, deterministic BP preprocessing, growth ties, terminal canonicalization, initial partition and fallback policies, and repair schedule. In executions that complete, replacing each rebuilding HUF oracle by its persistent counterpart leaves the entire Seamwise correction vector and every repair-acceptance decision unchanged. Consequently their logical-failure indicators agree pointwise on every sampled fault vector.
+\end{corollary}
+\begin{proof}
+For each conditional call, Theorem~\ref{thm:oracle} and terminal canonicalization give the same validity flag and candidate. Induction through ownership commitments and fallbacks gives the same initial incumbent. Induction through the repair schedule then gives the same conditioned targets, BP inputs, candidates, prior-cost tests and updated incumbents. The common final vector has the same logical action against any true fault vector. External process deadlines are outside this equivalence statement.
+\end{proof}
+
+\subsection{Repair work and exposed logical reach}\label{sec:work}
+Consider a finite repair schedule with calls indexed by $a$. Let $m_a=|J_a|$, $K_a$ be the maximum number of check and fault vertices in a component during call $a$, $W=\sum_a m_a$, and $K_*=\max_aK_a$. Repeated visits and overlapping bands contribute repeatedly to $W$.
+
+\begin{theorem}[Cluster-sensitive repair work]\label{thm:work}
+Assume uniformly bounded row and column degree of every local detector matrix; merge-only growth with nonnegative finite boundary weights; constant-cost, bounded-precision weight updates; and a scheduler with $O(m_a)$ successful growth events, $O(m_aK_a)$ incidence scans/root queries, and $O(m_a)$ priority-queue updates per call. With support-local exact XOR algebra and at most $I$ BP iterations, the persistent repair backend has deterministic work
+\begin{equation}
+T_{\rm repair}=O\!\left(\sum_a\left[Im_a+m_aK_a^2+m_a\log(m_a+2)\right]\right),\label{eq:workexact}
+\end{equation}
+and hence
+\begin{equation}\boxed{T_{\rm repair}=O\!\left(IW+WK_*^2+W\log(W+2)\right).}\label{eq:work}
+\end{equation}
+A sequential implementation uses $O(N_f+\max_a m_aK_a)$ space beyond the stored detector model and any offline rank tables. Optional terminal canonicalization is included in these bounds.
+\end{theorem}
+All complexity derivations, including the scheduling assumptions, are in Appendix~\ref{app:complexity}. If every nonzero fault column is visited at most $\mu$ times, then $W\le\mu N_f$. For bounded $I,\mu$ and $K_*=O(\log N_f)$, Eq.~\eqref{eq:work} gives $O(N_f\log^2N_f)$ repair work. The unconditional worst case permits $K_a=O(m_a)$ and gives $O(\sum_a m_a^3)$ algebraic work. This is a guarantee for the repair stage with this backend; the initial partition pass, global fallbacks, preprocessing, and any extra candidate search must be added separately. A fixed schedule bounds $W$; finite descent alone does not bound the number of revisits polynomially.
+
+The rank identity in Theorem~\ref{thm:reach} concerns every column in $J$. HUF can terminate after exposing only $F\subseteq J$. During persistent insertion, a dependent column reduces to zero with a coefficient relation $k_j$ satisfying $A k_j=0$. Retain its logical image $\eta_j=L_{:,J}k_j$ instead of discarding that relation entirely.
+
+\begin{proposition}[Exposed logical-reach certificate]\label{prop:exposed}
+Let $F$ contain all columns inserted during a local solve. The dependent-column relations form a basis of $\ker D_{:,F}$ after zero extension. Consequently
+\begin{equation}
+\begin{split}
+\reach_{\rm act}(F)&=\Span\{\eta_j:j\text{ inserted dependently}\}\\
+&=L_{:,F}(\ker D_{:,F})\subseteq\reach(J),\\
+\rho_{\rm act}(F)&=\dim\reach_{\rm act}(F)\le\rho(J).
+\end{split}\label{eq:active}
+\end{equation}
+Thus $\rho_{\rm act}(F)<\rho(J)$ certifies that the inserted support cannot realize all logical offsets available to the full band. Equality certifies equal logical-change spaces, not equal cost optima or logical-class probabilities.
+\end{proposition}
+This certificate connects the two scales of locality. Seamwise chooses which fault variables may be reconsidered; persistent HUF chooses which of those variables enter its algebra. In Eq.~\eqref{eq:toy}, insert columns 1 and 2 first: the inserted matrix has no kernel, so $\rho_{\rm act}=0$. Inserting column 4 then produces $k_4=(0,1,0,1)^T$, with $Dk_4=0$ and $Lk_4=1$. The exposed logical rank becomes one without rebuilding the detector basis. Appendix~\ref{app:reach} proves the certificate and accounts for its additional cost. No logical-rank guarantee is inferred from cluster size alone.
+
+The certificate is optional instrumentation. It does not change the reported policy or retrospectively enlarge the original circuit study. A future policy could continue growth until a prescribed reach is exposed, but its altered stopping rule, cost, and logical performance would require a separate evaluation.

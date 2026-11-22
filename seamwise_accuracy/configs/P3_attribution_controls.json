@@ -1,0 +1,211 @@
+{
+  "count": 128,
+  "configs": {
+    "surface_d3_p0.003_B4": [
+      {
+        "name": "fixed_r2_K1",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 1,
+        "radius": 2,
+        "selection": "cost"
+      },
+      {
+        "name": "fixed_r2_K8",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 8,
+        "radius": 2,
+        "selection": "cost"
+      },
+      {
+        "name": "joint_fast",
+        "kind": "new",
+        "policy": "joint",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "cut_fast",
+        "kind": "new",
+        "policy": "cut",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "joint_search8",
+        "kind": "new",
+        "policy": "joint",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 8,
+        "joint": true,
+        "selection": "cost"
+      },
+      {
+        "name": "fixed_r1_K8",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 8,
+        "radius": 1,
+        "selection": "cost"
+      }
+    ],
+    "surface_d5_p0.006_B4": [
+      {
+        "name": "fixed_r2_K1",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 30,
+        "candidate": true,
+        "K": 1,
+        "radius": 2,
+        "selection": "cost"
+      },
+      {
+        "name": "fixed_r2_K8",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 30,
+        "candidate": true,
+        "K": 8,
+        "radius": 2,
+        "selection": "cost"
+      },
+      {
+        "name": "joint_fast",
+        "kind": "new",
+        "policy": "joint",
+        "scale": 0.8,
+        "iterations": 30
+      },
+      {
+        "name": "cut_fast",
+        "kind": "new",
+        "policy": "cut",
+        "scale": 0.8,
+        "iterations": 30
+      },
+      {
+        "name": "joint_search8",
+        "kind": "new",
+        "policy": "joint",
+        "scale": 0.8,
+        "iterations": 30,
+        "candidate": true,
+        "K": 8,
+        "joint": true,
+        "selection": "cost"
+      },
+      {
+        "name": "fixed_r1_K8",
+        "kind": "new",
+        "policy": "repair1",
+        "scale": 0.8,
+        "iterations": 30,
+        "candidate": true,
+        "K": 8,
+        "radius": 1,
+        "selection": "cost"
+      }
+    ],
+    "bb144_p0.015_B4": [
+      {
+        "name": "fixed_r2_K1",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 1,
+        "radius": 2,
+        "selection": "cost"
+      },
+      {
+        "name": "fixed_r2_K8",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 8,
+        "radius": 2,
+        "selection": "cost"
+      },
+      {
+        "name": "joint_fast",
+        "kind": "new",
+        "policy": "joint",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "cut_fast",
+        "kind": "new",
+        "policy": "cut",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel"
+      },
+      {
+        "name": "joint_search8",
+        "kind": "new",
+        "policy": "joint",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 8,
+        "joint": true,
+        "selection": "cost"
+      },
+      {
+        "name": "fixed_r1_K8",
+        "kind": "new",
+        "policy": "repair2",
+        "scale": 0.8,
+        "iterations": 60,
+        "damping": 0.25,
+        "schedule": "parallel",
+        "candidate": true,
+        "K": 8,
+        "radius": 1,
+        "selection": "cost"
+      }
+    ]
+  },
+  "reason": "Disentangle global radius/initialization from extra candidate search; joint control reuses its identical primary seed instead of doing a useless second solve.",
+  "wall_cap": 600
+}

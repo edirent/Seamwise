@@ -1,0 +1,56 @@
+workloads:
+- surface_d3_p0.003_B4
+- surface_d5_p0.006_B4
+- bb144_p0.015_B4
+backends:
+- name: build_v1_rebuild
+  kind: native
+  family: bphuf
+  persistent: false
+  policy: repair1
+  build: build_v1
+- name: build_v1_persistent
+  kind: native
+  family: bphuf
+  persistent: true
+  policy: repair1
+  build: build_v1
+- name: build_v2_rebuild
+  kind: native
+  family: bphuf
+  persistent: false
+  policy: repair1
+  build: build_v2
+- name: build_v2_persistent
+  kind: native
+  family: bphuf
+  persistent: true
+  policy: repair1
+  build: build_v2
+- name: build_rebuild
+  kind: native
+  family: bphuf
+  persistent: false
+  policy: repair1
+  build: build
+- name: build_persistent
+  kind: native
+  family: bphuf
+  persistent: true
+  policy: repair1
+  build: build
+- name: packed_terminal
+  kind: native
+  family: bphuf
+  persistent: true
+  policy: repair1
+  dense_terminal: true
+count: 128
+repetitions: 3
+warmup: 16
+budgets:
+  preparation: 120
+  decode: 180
+  memory: 120
+claim_scope: implementation ablation on fixed validation-selected timing subset; exact
+  corrections required across revisions
